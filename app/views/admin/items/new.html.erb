@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2 class="mb-4">商品新規登録</h2>
+      <%= render 'layouts/errors', obj: @item %>
+  
+      <div class="form-wrapper">
+        <%= form_with(model: @item, url: admin_items_path, class: 'form', multipart: true) do |form| %>
+    
+          <div class="form-group">
+            <%= form.label :image, '商品画像' %>
+            <%= form.file_field :image, class: 'form-control' %>
+          </div>
+    
+          <div class="form-group">
+            <%= form.label :name, '商品名' %>
+            <%= form.text_field :name, class: 'form-control' %>
+          </div>
+    
+          <div class="form-group">
+            <%= form.label :description, '商品説明' %>
+            <%= form.text_area :description, class: 'form-control' %>
+          </div>
+    
+          <div class="form-group">
+            <%= form.label :genre_id, 'ジャンル' %>
+            <%= form.select :genre_id, options_for_select(Genre.all.map { |genre| [genre.name, genre.id] }), {}, class: 'form-control' %>
+          </div>
+    
+          <div class="form-group">
+            <%= form.label :price, '税抜価格' %>
+            <%= form.number_field :price, class: 'form-control' %>
+          </div>
+    
+          <div class="form-group">
+            <%= form.label :is_stopped, '販売ステータス' %><br>
+            <div class="form-check form-check-inline">
+              <%= form.radio_button :is_stopped, false, id: 'selling_status_1', class: 'form-check-input' %>
+              <%= form.label 'selling_status_1', '販売中', class: 'form-check-label' %>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= form.radio_button :is_stopped, true, id: 'selling_status_2', class: 'form-check-input' %>
+              <%= form.label 'selling_status_2', '販売停止中', class: 'form-check-label' %>
+            </div>
+          </div>
+    
+          <div class="actions">
+            <%= form.submit '新規登録', class: 'btn btn-success' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
