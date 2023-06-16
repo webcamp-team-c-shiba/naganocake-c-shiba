@@ -5,6 +5,7 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               
+              <!--カスタマーログイン時-->
               <% if customer_signed_in? %>
                <li class="nav-item-name h3">
                  ようこそ、<%= current_customer.last_name + current_customer.first_name %>さん！
@@ -22,6 +23,7 @@
                  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
                </li>
                
+               <!--管理者ーログイン時-->
                <% elsif admin_signed_in? %>
                <li class="nav-item">
                  <%= link_to "商品一覧",admin_items_path, class: 'nav-link text-dark' %>
@@ -39,6 +41,7 @@
                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
                </li>
                
+               <!--登録していない-->
                <% else %>
                <li class="nav-item">
                  <%= link_to "About", about_path %>
@@ -52,7 +55,6 @@
                <li class="nav-item">
                  <%= link_to "ログイン", new_customer_session_path %>
                </li>
-               
                <% end %>
             </ul>
           </div>
