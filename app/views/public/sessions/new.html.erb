@@ -6,8 +6,8 @@
       <%= form_with model: @customer, url: customer_session_path, class: "form-group" do |f| %>
       
         <div class="form-group">
-          <%= f.label :email, "メールアドレス", class: "form-label" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class: "form-control" %>
+            <%= f.label :email, "メールアドレス", class: "form-label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class: "form-control" %>
         </div>
   
         <div class="form-group">
