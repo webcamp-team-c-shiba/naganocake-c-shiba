@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <h2>ジャンル編集</h2>
+      <h2 class="my-3">ジャンル編集</h2>
 
       <%= form_with(model: @genre, url: admin_genre_path(@genre), class: 'form') do |form| %>
         <% if @genre.errors.any? %>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="actions">
-          <%= form.submit '変更を保存', class: 'btn btn-primary' %>
+          <%= form.submit '変更を保存', class: 'btn btn-success px-4' %>
         </div>
       <% end %>
     </div>

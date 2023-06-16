@@ -2,7 +2,7 @@
   <%= render 'layouts/errors', obj: @genre %>
   <div class="row">
     <div class="col-md-6">
-      <h2>ジャンル一覧・追加</h2>
+      <h2 class="my-3">ジャンル一覧・追加</h2>
 
       <div class="d-flex">
         <%= form_with(model: @genre, url: admin_genres_path, class: 'form flex-grow-1') do |form| %>
@@ -13,7 +13,7 @@
           </div>
 
           <div class="actions">
-            <%= form.submit '新規登録', class: 'btn btn-primary' %>
+            <%= form.submit '新規登録', class: 'btn btn-success px-4' %>
           </div>
         <% end %>
       </div>
@@ -34,7 +34,7 @@
             <tr>
               <td><%= genre.name %></td>
               <td>
-                <%= link_to '編集する', edit_admin_genre_path(genre), class: 'btn btn-primary' %>
+                <%= link_to '編集する', edit_admin_genre_path(genre), class: 'btn btn-success px-3' %>
               </td>
             </tr>
           <% end %>
