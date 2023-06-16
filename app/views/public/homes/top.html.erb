@@ -1,6 +1,53 @@
-<p>ようこそ、ながのCAKEへ！</p>
-<p>このサイトは、ケーキ販売のECサイトとなります。</p>
-<p>会員でない方も商品の閲覧はできますが、</p>
-<p>購入には会員登録が必要となります。</p>
-
-<h2>新着商品</h2>
+<div class='container px-5 px-sm-0'>
+  <div class="row">
+    <div class='col-md-3'>
+      <p>ジャンル検索</p>
+      <table class = "table">
+        <tbody>
+            
+          <tr>
+            <td>
+              
+            </td>
+          </tr>
+            
+        </tbody>
+      </table>
+    </div>
+        
+    <div class='col-md-8 offset-md-1'>
+      <div style="background: url(<%= asset_path "26604089_s.jpg" %>); background-size:cover;">
+        <div style="text-align: center; margin: 50px">
+          <p>
+            ようこそ、ながのCAKEへ！</br>
+            このサイトは、ケーキ販売のECサイトとなります。</br>
+            会員でない方も商品の閲覧はできますが、</br>
+            購入には会員登録が必要となります。
+          </p>
+          <%= link_to "About", about_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <div class="row">
+    <div class="col-4">
+          
+    </div>
+    <div class="col-8">
+      <div style="mt-5"><h2>新着商品</h2>
+      </div>
+      <div class="d-flex mt-5">
+      </div>
+    </div>
+  </div>
+    
+  <div class="row">
+    <div class="col-4">
+    </div>
+    <div class="col-lg-8" style="text-align: right;">
+    <%= link_to "全ての商品を見る＞" %>
+    </div>
+  </div>
+  
+</div>
