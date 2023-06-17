@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    resources :addresses
+  end
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, except: [:destroy]
