@@ -1,2 +1,80 @@
-<h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
+<div class="container">
+  <h3 class="my-3 ml-5">会員情報編集</h3>
+  <%= form_with(model: @customer, url: customers_path(@customer), method: :patch) do |f| %>
+    <form>
+      <div class="form-group row ml-3">
+        <label class="col-md-2 col-form-label">氏名</label>
+        <div class="col-md-10 form-row">
+          <div class="col-md-3 mr-5">
+            <%= f.text_field :last_name, class: "form-control" %>
+          </div>
+          <div class="col-md-3">
+            <%= f.text_field :first_name, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row ml-3">
+        <label class="col-md-2 col-form-label">フリガナ</label>
+        <div class="col-md-10 form-row">
+          <div class="col-md-3 mr-5">
+            <%= f.text_field :kana_last_name, class: "form-control" %>
+          </div>
+          <div class="col-md-3">
+            <%= f.text_field :kana_first_name, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row ml-3">
+        <label class="col-md-2 col-form-label">郵便番号</label>
+        <div class="col-md-10 form-row">
+          <div class="col-md-3">
+            <%= f.text_field :postcode, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row ml-3">
+        <label class="col-md-2 col-form-label">住所</label>
+        <div class="col-md-10 form-row">
+          <div class="col-md-8">
+            <%= f.text_field :address, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row ml-3">
+        <label class="col-md-2 col-form-label">電話番号</label>
+        <div class="col-md-10 form-row">
+          <div class="col-md-3">
+            <%= f.text_field :phone_number, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row ml-3">
+        <label class="col-md-2 col-form-label">メールアドレス</label>
+        <div class="col-md-10 form-row">
+          <div class="col-md-3">
+            <%= f.email_field :email, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row ml-3">
+        <label class="col-md-2 col-form-label"></label>
+        <div class="col-md-10 form-row">
+          <div class="col-md-3">
+            <%= f.submit "編集内容を保存", class: "btn btn-success px-5" %>
+          </div>
+          <div class="col-md-3 d-flex justify-content-end ml-5">
+            <%= link_to "退会する", customers_check_path, class: "btn btn-danger px-3" %>
+          </div>
+          
+        </div>
+      </div>
+      
+    </form>
+  <% end %>
+</div>

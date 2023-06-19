@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
 
   scope module: :public do
-    get 'customers/show' => "customers#show"
-    get 'customers/edit' => "customers#edit"
-    patch 'customers/update' => "customers#update"
+    resource :customers, only: [:show, :edit, :update]
     get 'customers/check' => "customers#check"
     patch 'customers/withdrawal' => "customers#withdrawal"
   end
