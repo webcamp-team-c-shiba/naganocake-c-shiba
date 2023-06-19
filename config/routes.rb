@@ -10,10 +10,12 @@ Rails.application.routes.draw do
 
   root to:'public/homes#top'
   get 'about' => 'public/homes#about'
-  get 'admin' => 'admin/homes#top'
 
   scope module: :public do
-    resources :items,only: [:index,:show]
+    resources :items, only: [:index,:show]
+    resources :cart_items, only: [:index,:create,:destroy,:update]
+    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
+    
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

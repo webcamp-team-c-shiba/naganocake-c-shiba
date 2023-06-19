@@ -2,12 +2,12 @@
  <div class="row">
   <div class="mx-auto">
 
-   <h4 class="font-weight-bold mt-4 mb-4">商品一覧(全<%= @total_items.count %>件）</h4>
+   <h4 >商品一覧(全<%= @total_items.count %>件）</h4>
    <div class="d-flex flex-wrap">
      <% @items.each do |item| %>
-     <div class="col-md-3 mb-4">
-       <div><%= image_tag item.get_image,size:"200x200"%></div>
-       <div><%= link_to item.name,item_path(item.id),class: 'text-dark' %></div>
+     <div class="col-md-3">
+       <div><%= image_tag item.get_image,size:"200x200" %></div>
+       <div><%= link_to item.name, item_path(item.id), class: 'text-dark' %></div>
        <div>¥<%= item.price %></div>
      </div>
      <% end %>
@@ -19,6 +19,6 @@
 
    </div>
 
-   </div>
+  </div>
  </div>
 </div>
