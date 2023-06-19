@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
   
   namespace :public do
-    # Rails.application.routes.draw do
+    Rails.application.routes.draw do
     # get '/orders/new', to: 'orders#new'
-    # end
-    # # get 'orders/new' , to: 'orders#new'
+    # get 'orders/check', to: 'orders#check'
+    # get 'orders/complete', to: 'orders#complete'
+    # get '/orders', to: 'orders#create'
+    # get '/orders', to: 'orders#index'
+    # get '/orders/:id', to: 'orders#show'
+    end
+    # get 'orders/new' => 'orders#new'
     # get 'orders/check' => 'orders#check'
     # get 'orders/complete' => 'orders#complete'
     # get 'orders/create' => 'orders#create'
