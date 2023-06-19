@@ -1,2 +1,54 @@
-<h1>Public::Addresses#index</h1>
-<p>Find me in app/views/public/addresses/index.html.erb</p>
+<div class="container">
+    <h5 class="bg-light col-2 my-5 text-center">配送先登録/一覧</h5>
+    
+    <%= form_with model: @address, url: public_addresses_path, class: "form-group" do |f| %>
+        <div class="form-group">
+            
+            <%= f.label :postcode, "郵便番号", class: "form-label" %>
+            <%= f.text_field :postcode, autofocus: true, autocomplete: "postal_code", placeholder: "0000000", class: "form-control" %>
+        </div>
+    
+        <div class="form-group">
+          <%= f.label :address, "配送先", class: "form-label" %>
+          <%= f.text_field :address, autocomplete: "東京都渋谷区代々木神園町0-0", class: "form-control" %>
+        </div>
+    
+        <div class="form-group">
+          <%= f.label :name, "宛名", class: "form-label" %>
+          <%= f.text_field :name, autocomplete: "令和道子", class: "form-control" %>
+        </div>
+        <div class="actions text-center">
+          <%= f.submit "新規登録", class: "btn btn-success col-2 my-3" %>
+        </div>
+    <% end %>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <td>郵便番号</td>
+                <td>住所</td>
+                <td>宛名</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <% @addresses.each do |address| %>
+            <tr>
+                <td>
+                    <%= address.postcode %>
+                </td>    
+                <td>
+                    <%= address.address %>
+                </td>
+                <td>
+                    <%= address.name %>
+                </td>
+                <td>
+                    <%= link_to "編集する", edit_public_address_path(address.id), method: :post, class:"btn btn-sm btn-success" %>
+                    <%= link_to "削除する", public_address_path(address.id), method: :delete, class:"btn btn-sm btn-danger" %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
