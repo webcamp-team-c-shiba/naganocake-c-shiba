@@ -1,0 +1,24 @@
+<div class="container">
+    <h5 class="bg-light col-2 my-5 text-center">配送先編集</h5>
+    <%= render 'layouts/errors', obj: @address %>
+    <%= form_with model: @address, class: "form-group" do |f| %>
+        <div class="form-group">
+            
+            <%= f.label :postcode, "郵便番号", class: "form-label" %>
+            <%= f.text_field :postcode, autofocus: true, autocomplete: "off", class: "form-control col-2" %>
+        </div>
+    
+        <div class="form-group">
+            <%= f.label :address, "配送先", class: "form-label" %>
+            <%= f.text_field :address, autocomplete: "off", class: "form-control col-6" %>
+        </div>
+    
+        <div class="form-group">
+            <%= f.label :name, "宛名", class: "form-label" %>
+            <div class="form-inline">
+                <%= f.text_field :name, autocomplete: "off", class: "form-control col-2" %>
+                <%= f.submit "変更内容を保存", class: "btn btn-success col-2 mx-auto" %>
+            </div>
+        </div>
+    <% end %>
+</div>
