@@ -18,7 +18,7 @@
       <div class="row">
         <% @items.first(4).each do |item| %>
           <div class="col-md-3 mb-4">
-            <%= image_tag item.get_image,size:"200x200"%><br>
+            <%= image_tag item.get_item_image,size:"200x200"%><br>
             <span><%= link_to item.name,item_path(item.id),class: 'text-dark' %></span>
             ¥<%= item.price %>
           </div>

@@ -6,7 +6,7 @@
    <div class="d-flex flex-wrap">
      <% @items.each do |item| %>
      <div class="col-md-3">
-       <div><%= image_tag item.get_image,size:"200x200" %></div>
+       <div><%= image_tag item.get_item_image,size:"200x200" %></div>
        <div><%= link_to item.name, item_path(item.id), class: 'text-dark' %></div>
        <div>¥<%= item.price %></div>
      </div>
