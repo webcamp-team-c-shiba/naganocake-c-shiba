@@ -1,0 +1,10 @@
+<h1>#注文情報入力画面(支払方法・配送先の選択)</h1>
+<p>Find me in app/views/public/orders/new.html.erb</p>
+
+<div class="form-wrapper">
+<%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+<%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
+
+<%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+<%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
+</div>
