@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   
-  resources :addresses, except: [:show]
+  scope module: :public do
+    resources :addresses, except: [:show]
+  end
+
   
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
