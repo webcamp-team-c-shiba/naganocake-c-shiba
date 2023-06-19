@@ -32,7 +32,7 @@ class AddressesController < ApplicationController
   def destroy
     address = Address.find(params[:id])
     address.destroy
-    redirect_to public_addresses_path
+    redirect_to addresses_path
   end
 
 private
