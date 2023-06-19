@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, except: [:destroy]
-    get '/admin' => 'homes#top'
+    get '/' => 'homes#top'
   end
 
   devise_for :admin, skip: [:registrations, :passwords] , controllers: {
