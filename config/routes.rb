@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  scope module: :public do
+    get 'customers/show' => "customers#show"
+    get 'customers/edit' => "customers#edit"
+    patch 'customers/update' => "customers#update"
+    get 'customers/check' => "customers#check"
+    patch 'customers/withdrawal' => "customers#withdrawal"
+  end
+  
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, except: [:destroy]
