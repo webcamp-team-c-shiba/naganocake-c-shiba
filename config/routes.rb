@@ -1,22 +1,10 @@
 Rails.application.routes.draw do
   
-  namespace :public do
-    Rails.application.routes.draw do
-    # get '/orders/new', to: 'orders#new'
-    # get 'orders/check', to: 'orders#check'
-    # get 'orders/complete', to: 'orders#complete'
-    # get '/orders', to: 'orders#create'
-    # get '/orders', to: 'orders#index'
-    # get '/orders/:id', to: 'orders#show'
-    end
-    # get 'orders/new' => 'orders#new'
-    # get 'orders/check' => 'orders#check'
-    # get 'orders/complete' => 'orders#complete'
-    # get 'orders/create' => 'orders#create'
-    # get 'orders/index' => 'orders#index'
-    # get 'orders/show' => 'orders#show'
-  resources :orders, only: [:new, :check, :complete, :create, :index, :show]
-  resources :addresses, except: [:show]
+  scope module: :public do
+    get 'orders/check' => 'orders#check'
+    get 'orders/complete' => 'orders#complete'
+    resource :orders, only: [:new, :create, :index, :show]
+    resources :addresses, except: [:show]
   end
   
   namespace :admin do
