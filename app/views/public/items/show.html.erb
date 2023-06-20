@@ -1,0 +1,32 @@
+<div class="container">
+ <div class="row">
+  <div class="mx-auto">
+
+ <table>
+   <div class="col-md-3 mb-4">
+    <% if @item.image.attached? %>
+     <%= image_tag @item.image,size:"200x200" %>
+    <% else %>
+     <%= image_tag 'no_image', size: "200x200" %>
+    <% end %>
+  </div>
+  <tr>
+    <td><%= @item.name %></td>
+  </tr>
+  <tr>
+    <td><%= @item.description %></td>
+  </tr>
+  <tr>
+    <td>¥<%= @item.with_tax_price %>(税込)</td>
+  </tr>
+  </table>
+  <%= form_with model: @cart_item,url: cart_items_path do |f| %>
+  <%= f.select :amount, *[1..10] %>
+  <%= f.hidden_field :item_id, :value => @item.id %>
+  <%= f.submit  "カートに入れる", class: 'btn btn-success' %>
+  <% end %>
+
+
+ </div>
+</div>
+</div>
