@@ -1,0 +1,21 @@
+<h1>#注文情報入力画面(支払方法・配送先の選択)</h1>
+
+<div class="form-wrapper">
+    <%= form_with model: @order, url: orders_check_path do |f| %> 
+        <h5>支払い方法</h5>
+        <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+        <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
+        
+        <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+        <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
+        
+        <h5>お届け先</h5>
+        <div class="form-check">
+            <%= f.radio_button :address, @customer.address, class: "form-check-input" %>
+            <%= f.label :address, value: @customer.address, class: "form-check-label" do %>
+                <h6>ご自身の住所</h6>
+                <%= @customer.address %>
+            <% end%>
+        </div>
+    <% end %>
+</div>
