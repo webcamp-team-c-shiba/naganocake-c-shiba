@@ -4,7 +4,6 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :cart_items, dependent: :destroy
   has_many :addresses, dependent: :destroy
            
   validates :last_name, presence: true
@@ -14,5 +13,13 @@ class Customer < ApplicationRecord
   validates :postcode, presence: true
   validates :address, presence: true
   validates :phone_number, presence: true
+  validates :email, presence: true
+  validates :encrypted_password, presence: true
+  
+  
+  # is_deletedがfalseならtrueを返すようにしている
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
 
 end

@@ -2,18 +2,8 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="my-3">ジャンル編集</h2>
-
+      <%= render 'layouts/errors', obj: @genre %>
       <%= form_with(model: @genre, url: admin_genre_path(@genre), class: 'form') do |form| %>
-        <% if @genre.errors.any? %>
-          <div id="error_explanation" class="alert alert-danger">
-            <h2><%= pluralize(@genre.errors.count, "エラー") %>が発生しました。</h2>
-            <ul>
-              <% @genre.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
 
         <div class="form-group">
           <%= form.label :name, 'ジャンル名' %>
