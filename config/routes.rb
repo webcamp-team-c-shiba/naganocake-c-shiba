@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   
   
   scope module: :public do
+    get 'orders/check' => 'orders#check'
+    get 'orders/complete' => 'orders#complete'
+    resource :orders, only: [:new, :create, :index, :show]
+    
     resources :addresses, except: [:show]
     
     resource :customers, only: [:show, :edit, :update]
@@ -16,11 +20,12 @@ Rails.application.routes.draw do
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
   end
 
+
   
   namespace :admin do
+    get '/' => 'homes#top'
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, except: [:destroy]
-    get '/' => 'homes#top'
   end
   
   devise_for :admin, skip: [:registrations, :passwords] , controllers: {
@@ -31,5 +36,6 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
