@@ -1,0 +1,37 @@
+<div class="container">
+    <h5 class="bg-light col-2 my-5 text-center">配送先登録/一覧</h5>
+    <%= render 'layouts/errors', obj: @address %>
+    
+    <%= render 'form', address: @address %>
+    
+    <!--配送先一覧-->
+    <table class="table table-bordered mt-5 col-8">
+        <thead class="thead-light">
+            <tr>
+                <td>郵便番号</td>
+                <td>住所</td>
+                <td>宛名</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <% @addresses.each do |address| %>
+            <tr>
+                <td>
+                    <%= address.postcode %>
+                </td>    
+                <td>
+                    <%= address.address %>
+                </td>
+                <td>
+                    <%= address.name %>
+                </td>
+                <td>
+                    <%= link_to "編集する", edit_address_path(address.id), class:"btn btn-sm btn-success" %>
+                    <%= link_to "削除する", address_path(address.id), method: :delete, class:"btn btn-sm btn-danger" %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

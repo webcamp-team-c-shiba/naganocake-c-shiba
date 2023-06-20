@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <div class="d-flex justify-content-between align-items-center my-2">
+        <h2 class="ml-3">商品一覧</h2>
+        <div>
+          <%= link_to new_admin_item_path, class: "btn mr-2" do %>
+            <i class="fa-regular fa-square-plus fa-2x"></i>
+          <% end %>
+          
+          <!--仮でジャンル一覧と管理者ログアウトを付けてます-->
+          <%= link_to admin_genres_path, class: "btn mr-2" do %>
+            ジャンル一覧・追加
+          <% end %>
+          <%= link_to destroy_admin_session_path,method: :delete, class: "btn mr-2" do %>
+            管理者ログアウト
+          <% end %>
+          <!--------------------------------------------------->
+          
+        </div>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>税抜価格</th>
+            <th>ジャンル</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= item.id %></td>
+              <td>
+                <%= link_to admin_item_path(item) do %>
+                  <span style="color: black;"><%= item.name %></span>
+                <% end %>
+              </td>
+              <td><%= item.price %> 円</td>
+              <td><%= item.genre.name %></td>
+              <td>
+                <% if item.is_stopped %>
+                  <span class="text-secondary">販売停止中</span>
+                <% else %>
+                  <span class="text-success">販売中</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="text-center">
+        <%= paginate @items, theme: 'bootstrap-5' %>
+      </div>
+    </div>
+  </div>
+</div>
