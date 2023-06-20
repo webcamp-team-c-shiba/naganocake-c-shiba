@@ -1,2 +1,29 @@
-<h1>注文履歴画面</h1>
+<h1>注文履歴一覧</h1>
 
+ <table class="table table-bordered mt-5 col-8">
+        <thead class="thead-light">
+            <tr>
+                <td>注文日</td>
+                <td>配送先</td>
+                <td>注文商品</td>
+                <td>支払金額</td>
+                <td>ステータス</td>
+                <td>注文詳細</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% @orders.each do |order| %>
+            <tr>
+                <td>
+                    <%=   %>
+                </td>    
+                <td>
+                    <%=   %>
+                </td>
+                <td>
+                    <%=    %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>

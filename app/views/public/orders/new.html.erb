@@ -1,4 +1,4 @@
-<h1>#注文情報入力画面(支払方法・配送先の選択)</h1>
+<h3>注文情報入力</h3>
 
 <div class="form-wrapper">
     <%= form_with model: @order, url: orders_check_path do |f| %>
@@ -41,4 +41,8 @@
             <% end%>
         </div>
     <% end %>
+  
+  <div class="text-center">
+    <%= link_to "確認画面へ進む", orders_check_path, class: "btn btn-primary" %>
+  </div>
 </div>
