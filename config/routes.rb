@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   
   scope module: :public do
     resources :addresses, except: [:show]
+    resource :customers, only: [:show, :edit, :update]
+    get 'customers/check' => "customers#check"
+    patch 'customers/withdrawal' => "customers#withdrawal"
   end
 
   
