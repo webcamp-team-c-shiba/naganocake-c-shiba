@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="my-3">ジャンル編集</h2>
-      <%= render 'layouts/errors', obj: @genre %>
       <%= form_with(model: @genre, url: admin_genre_path(@genre), class: 'form') do |form| %>
-
+      <%= render 'layouts/errors', obj: @genre %>
+      
         <div class="form-group">
           <%= form.label :name, 'ジャンル名' %>
           <%= form.text_field :name, class: 'form-control' %>

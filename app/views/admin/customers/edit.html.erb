@@ -4,8 +4,10 @@
       
       <h3><%= @customer.last_name + @customer.first_name %>さんの会員情報編集</h3>
       
-      <%= form_with(model: @customer, url: admin_customer_path, method: :patch, local: true) do |form| %>
-      
+
+      <%= render 'layouts/errors', obj: @customer %>
+      <%= form_with model: @customer, url: admin_customer_path do |f| %>
+
       <table class="table">
         <tr>
           <th>会員ID</th>
