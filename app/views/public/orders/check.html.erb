@@ -65,7 +65,9 @@
         <p class="col"><%= @order.address %></p>
     </div>
     <div class="row">
-        <%= link_to "注文を確定する", orders_path, data: { method: :post }, class: "btn btn-successr px-3" %>
+        <% form_with model: @order, url: orders_path %>
+            <% f.submit "注文を確定する", class: "btn btn-successr px-3" %>
+        <% end %>
     </div>
 </div>
 
