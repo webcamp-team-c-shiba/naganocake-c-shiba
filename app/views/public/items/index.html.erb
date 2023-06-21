@@ -8,7 +8,7 @@
      <div class="col-md-3">
        <div><%= image_tag item.get_item_image(150, 100) %></div>
        <div><%= link_to item.name, item_path(item.id), class: 'text-dark' %></div>
-       <div>¥<%= item.price %></div>
+       <div>¥<%= number_with_delimiter(item.price) %></div>
      </div>
      <% end %>
    </div>

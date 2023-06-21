@@ -26,7 +26,7 @@
               <tr>
                 <th style="white-space: nowrap;">税抜価格<br>(税込価格)</th>
                 <td style="vertical-align: middle;">
-                  <%= number_with_delimiter(@item.price) %>円（<%= number_with_delimiter((@item.price * 1.1).to_i) %>円）
+                  <%= number_with_delimiter(@item.price) %>円（<%= number_with_delimiter((@item.with_tax_price).to_i) %>円）
                 </td>
               </tr>
               <tr>

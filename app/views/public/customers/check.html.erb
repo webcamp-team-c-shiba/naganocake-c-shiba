@@ -1,23 +1,17 @@
-<h3 class="my-3 ml-5">退会確認</h3>
 
-<p>本当に退会しますか？</p>
-
-<%= form_with(url: customers_withdrawal_path, method: :patch) do |f| %>
-  <div class="form-group row ml-3">
-    <div class="col-md-2"></div>
-    <div class="col-md-10 form-row">
-      <div class="col-sm-4 col-form-label">
-        <%= f.label :is_deleted, '退会する', class: 'form-check-label' %>
-      </div>
-      <div class="col-sm-8">
-        <%= f.check_box :is_deleted, class: 'form-check-input' %>
-      </div>
-      <div class="col-md-3">
-        <%= link_to "退会しない", customers_path, class: "btn btn-secondary px-3" %>
-      </div>
-      <div class="col-md-3">
-        <%= f.submit "退会する", class: "btn btn-danger px-3", data: { confirm: '本当に退会しますか？' } %>
+<div class="container">
+  <div class="row align-middle">
+    <div class="col-md-8 offset-md-2 text-center mt-5">
+      <h3 class="my-3">本当に退会しますか？</h3>
+      <p>
+        退会すると、会員登録情報や<br>
+        これまでの購入履歴が閲覧できなくなります。<br>
+        退会する場合は、「退会する」をクリックしてください。
+      </p>
+      <div class="text-center mt-4">
+        <%= link_to "退会しない", customers_path, class: "btn btn-primary px-3 mr-3" %>
+        <%= link_to "退会する", customers_withdrawal_path, method: :patch, class: "btn btn-danger px-4", data: { confirm: "本当に退会しますか？" } %>
       </div>
     </div>
   </div>
-<% end %>
+</div>

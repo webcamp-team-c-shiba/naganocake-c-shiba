@@ -1,3 +1,5 @@
 class ApplicationController < ActionController::Base
-    #before_action :authenticate_customer!
+
+  add_flash_types :success, :info, :warning, :danger
+  
 end
