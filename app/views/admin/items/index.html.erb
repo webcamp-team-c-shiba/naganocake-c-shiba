@@ -8,15 +8,6 @@
             <i class="fa-regular fa-square-plus fa-2x"></i>
           <% end %>
           
-          <!--仮でジャンル一覧と管理者ログアウトを付けてます-->
-          <%= link_to admin_genres_path, class: "btn mr-2" do %>
-            ジャンル一覧・追加
-          <% end %>
-          <%= link_to destroy_admin_session_path,method: :delete, class: "btn mr-2" do %>
-            管理者ログアウト
-          <% end %>
-          <!--------------------------------------------------->
-          
         </div>
       </div>
 
@@ -53,7 +44,7 @@
         </tbody>
       </table>
 
-      <div class="text-center">
+      <div>
         <%= paginate @items, theme: 'bootstrap-5' %>
       </div>
     </div>

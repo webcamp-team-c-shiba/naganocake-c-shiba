@@ -1,4 +1,5 @@
 class Public::CartItemsController < ApplicationController
+  before_action :authenticate_customer!
   
   def index
     @cart_items = CartItem.all
@@ -24,7 +25,7 @@ class Public::CartItemsController < ApplicationController
   end
   
   def create
-    if @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+    if@cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
       @cart_item.customer_id = current_customer.id
       @cart_item.save
     else
