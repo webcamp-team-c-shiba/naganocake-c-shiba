@@ -20,7 +20,7 @@
           <div class="col-md-3 mb-4">
             <%= image_tag item.get_item_image(150, 100) %><br>
             <span><%= link_to item.name,item_path(item.id),class: 'text-dark' %></span>
-            ¥<%= number_with_delimiter(item.price) %>
+            ¥<%= item.price %>
           </div>
         <% end %>
       </div>
