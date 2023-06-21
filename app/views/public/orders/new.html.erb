@@ -11,19 +11,19 @@
 
         <h5>お届け先</h5>
         <div class="form-check">
-            <%= f.radio_button :address, @customer.address, class: "form-check-input" %>
+            <%= f.radio_button :address, @customer.address, id:0, class: "form-check-input" %>
             <%= f.label :address, value: @customer.address, class: "form-check-label" do %>
                 <h6>ご自身の住所</h6>
                 <%= @customer.address %>
             <% end%>
             <br>
-            <%= f.radio_button :address, @customer.address, class: "form-check-input" %>
+            <%= f.radio_button :address, @customer.address, id:1, class: "form-check-input" %>
             <%= f.label :address, value: @customer.address, class: "form-check-label" do %>
                 <h6>登録済住所から選択</h6>
                 <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
             <% end%>
             <br>
-            <%= f.radio_button :address, @customer.address, class: "form-check-input" %>
+            <%= f.radio_button :address, @customer.address, id:2, class: "form-check-input" %>
             <%= f.label :address, value: @customer.address, class: "form-check-label" do %>
                 <h6>新しいお届け先</h6>
                   <tr>
@@ -36,13 +36,13 @@
                   </tr>
                   <tr>
                     <th>宛名</th>
-                    <th><%= f.text_field :namee, class:"form-control", placeholder:"令和道子" %></th>
+                    <th><%= f.text_field :name, class:"form-control", placeholder:"令和道子" %></th>
                   </tr>
             <% end%>
         </div>
     <% end %>
   
   <div class="text-center">
-    <%= link_to "確認画面へ進む", orders_check_path, class: "btn btn-primary" %>
+    <%= link_to "確認画面へ進む", orders_check_path, data: { method: :post }, class: "btn btn-primary" %>
   </div>
 </div>

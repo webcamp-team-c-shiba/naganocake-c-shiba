@@ -5,6 +5,44 @@ class Public::OrdersController < ApplicationController
   end
 
   def check
+    customer = current_customer
+    session[:order] = Order.new
+    session[:order][:payment_method] = params[:method].to_i
+    
+    @order = Order.new(order_params)
+    @order.postcode = current_customer.postcode
+    @order.address = current_customer.address
+    @order.name = current_customer.first_name + current_customer.last_name
+ 
+
+    destination = params[:a_method].to_i
+    
+   
+		if destination == 0
+
+			session[:order][:postcode] = customer.postcode
+			session[:order][:address] = customer.address
+			session[:order][:name] = customer.last_name + customer.first_name
+
+		
+		elsif destination == 1
+
+			address = address.find(params[:address])
+			session[:order][:postcode] = address.postcode
+			session[:order][:address] = address.address
+			session[:order][:name] = address.name 
+
+		
+		elsif destination == 2
+
+			session[:new_address] = 2
+			session[:order][:postcode] = params[:postcode]
+			session[:order][:address] = params[:address]
+			session[:order][:name] = params[:name]
+
+		end
+		
+    cart_items = current_customer.cart_items
     @cart_items = CartItem.where(customer_id: current_customer.id)
     @shipping_fee = 800
   end
@@ -38,6 +76,6 @@ class Public::OrdersController < ApplicationController
   private
   
   def order_params
-    params.require(:order).permit(:payment, :payment_method, :postcode, :address, :name)
+    params.require(:order).permit(:payment_method, :payment, :postcode, :address, :name)
   end
 end
