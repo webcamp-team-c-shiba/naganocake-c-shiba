@@ -5,6 +5,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def check
+    @order = Order.new(orders_check_params)
     @cart_items = CartItem.where(customer_id: current_customer.id)
     @shipping_fee = 800
   end
@@ -37,6 +38,9 @@ class Public::OrdersController < ApplicationController
   
   private
   
+  def order_check_params
+    params.require(:order).permit( :payment_method, :postcode, :address, :name)
+  end 
   def order_params
     params.require(:order).permit(:payment, :payment_method, :postcode, :address, :name)
   end
