@@ -1,47 +1,35 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
+  
   def new
     @order = Order.new
     @customer = Customer.find(current_customer.id)
   end
 
   def check
-    customer = current_customer
-    session[:order] = Order.new
-    session[:order][:payment_method] = params[:method].to_i
-    
     @order = Order.new(order_params)
-    @order.postcode = current_customer.postcode
-    @order.address = current_customer.address
-    @order.name = current_customer.first_name + current_customer.last_name
- 
+    if params[:order][:address_option] == "0"
+      @order.postcode = current_customer.postcode
+      @order.address = current_customer.address
+      @order.name = current_customer.first_name + current_customer.last_name
+      
+    elsif params[:order][:address_option] == "1"
+      @addresses = Address.all
+      @selected_address = Address.find(params[:order][:customer_id])
+      @address_id = @selected_address.id
+      @order.postcode = postcode
+      @order.address = address
+      @order.name = name 
+      
+    elsif params[:order][:address_option] = "2"
+      @order.postcode = params[:order][:postcode]
+      @order.address = params[:order][:address]
+      @order.name = params[:order][:name]
+      
+    else
+      render 'new'
+    end
 
-    destination = params[:a_method].to_i
-    
-   
-		if destination == 0
-
-			session[:order][:postcode] = customer.postcode
-			session[:order][:address] = customer.address
-			session[:order][:name] = customer.last_name + customer.first_name
-
-		
-		elsif destination == 1
-
-			address = address.find(params[:address])
-			session[:order][:postcode] = address.postcode
-			session[:order][:address] = address.address
-			session[:order][:name] = address.name 
-
-		
-		elsif destination == 2
-
-			session[:new_address] = 2
-			session[:order][:postcode] = params[:postcode]
-			session[:order][:address] = params[:address]
-			session[:order][:name] = params[:name]
-
-		end
-		
     cart_items = current_customer.cart_items
     @cart_items = CartItem.where(customer_id: current_customer.id)
     @shipping_fee = 800

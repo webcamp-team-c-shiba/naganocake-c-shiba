@@ -62,7 +62,11 @@
     
     <div class="row">
         <h5 class="col">お届け先</h5>
-        <p class="col"><%= @order.address %></p>
+        <p class="col">
+        〒<%= @order.postcode %>
+        <%= @order.address %>
+        <%= @order.name %>
+        </p>
     </div>
     <div class="row">
         <%= link_to "注文を確定する", orders_path, data: { method: :post }, class: "btn btn-successr px-3" %>
