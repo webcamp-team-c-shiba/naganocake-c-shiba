@@ -19,8 +19,18 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @customer = current_customer
-    session[:order] = Order.new
+    byebug
+    @order = Order.new(order_params, customer_id: current_user.id, shipping_fee: @shipping_fee)
+    if @orer.save
+        @order_items.each do |order_item|
+          @order_item = OrderItem.new(item_id: order_item.item_id, order_id: @order.id, price: order_item.item.price, amount: order_item.amount)
+          @order_item.save
+        end
+        redirect_to orders_complete_path
+    else
+      render :check
+    end
+    
   end
 
   def index
@@ -29,5 +39,11 @@ class Public::OrdersController < ApplicationController
 
   def show
     
+  end
+  
+  private
+  
+  def order_params
+    params.require(:order).permit(:payment, :payment_method, :postcode, :address, :name)
   end
 end

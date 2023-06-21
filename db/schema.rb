@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_19_053938) do
+ActiveRecord::Schema.define(version: 2023_06_21_040843) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(version: 2023_06_19_053938) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.integer "customer_id"
-    t.string "postcode"
-    t.string "address"
-    t.string "name"
+    t.integer "customer_id", null: false
+    t.string "postcode", null: false
+    t.string "address", null: false
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -105,17 +105,27 @@ ActiveRecord::Schema.define(version: 2023_06_19_053938) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.integer "customer_id"
-    t.integer "shipping_fee"
-    t.integer "payment"
-    t.integer "payment_method"
-    t.string "postcode"
-    t.string "address"
-    t.string "name"
-    t.integer "status"
+  create_table "order_items", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "order_id", null: false
+    t.integer "price", null: false
+    t.integer "amount", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "shipping_fee", null: false
+    t.integer "payment", null: false
+    t.integer "payment_method", null: false
+    t.string "postcode", null: false
+    t.string "address", null: false
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

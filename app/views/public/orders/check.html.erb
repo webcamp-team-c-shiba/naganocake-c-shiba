@@ -1,7 +1,7 @@
 <div class="container">
     <h4 class="bg-light col-2 my-4">新規会員登録</h4>
     <!--商品情報テーブル-->
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <th>商品名</th>
             <th>単価（税込）</th>
@@ -10,23 +10,24 @@
         </thead>
         <tbody>
             <!--商品合計用の変数設定-->
-            <% tatal_items_price = 0 %>
+            <% total = 0 %>
             <!--1商品ずつの表示、計算-->
-            <%= @cart_items.each do |cart_item| %>
+            <% @cart_items.each do |cart_item| %>
                 <tr>
                     <td>
                         <%= image_tag cart_item.item.get_item_image(150, 100) %>
-                        cart_item.item.name
+                        <%= cart_item.item.name %>
                     </td>
                     <td>
-                        <% item_price_tax = cart_item.item.price.with_tax_price %>
-                        <%= item_price_tax %>
+                        <%= cart_item.item.with_tax_price %>
                     </td>
                     <td>
-                        <% total_item_price = item_price_tax * cart_item.amout %>
-                        <%= total_item_price %>
+                        <%= cart_item.amount %>
+                    </td>
+                    <td>
+                        <%= cart_item.subtotal %>
                         <!--商品合計用の計算-->
-                        <% total_items_price += total_item_price %>
+                        <% total = cart_item.subtotal %>
                     </td>
                 </tr>
             <% end %>
@@ -34,7 +35,7 @@
     </table>
     
     <!--金額テーブル-->
-    <table class="table">
+    <table class="table table-bordered">
         <tbody>
             <tr>
                 <th>送料</th>
@@ -42,12 +43,12 @@
             </tr>
             <tr>
                 <th>商品合計</th>
-                <td><%= total_items_price %></td>
+                <td><%= total %></td>
             </tr>
             <tr>
                 <th>請求金額</th>
                 <td>
-                    <% @payment = @shipping_fee + total_items_price %>
+                    <% @payment = @shipping_fee + total %>
                     <%= @payment %>
                 </td>
             </tr>
@@ -56,7 +57,7 @@
     
     <div class="row">
         <h5 class="col">支払い方法</h5>
-        <p class="col"><%= key(@order.payment_methods) %></p>
+        <p class="col"><%= Order.payment_methods_i18n[@order.payment_method] %></p>
     </div>
     
     <div class="row">
