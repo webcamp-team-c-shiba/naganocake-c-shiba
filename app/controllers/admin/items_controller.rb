@@ -15,6 +15,7 @@ class Admin::ItemsController < ApplicationController
       flash[:info] = "商品が登録されました。"
       redirect_to admin_item_path(@item)
     else
+      flash[:danger] = "未記入項目があります。"
       render :new
     end
   end
@@ -33,6 +34,7 @@ class Admin::ItemsController < ApplicationController
       flash[:success] = "商品情報が更新されました。"
       redirect_to admin_item_path(@item)
     else
+      flash[:danger] = "未記入項目があります。"
       render :edit
     end
   end

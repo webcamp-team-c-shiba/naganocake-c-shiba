@@ -26,7 +26,6 @@ class Public::SessionsController < Devise::SessionsController
       else
       end
     else
-      flash[:warning] = "該当するユーザーが見つかりません"
     end
   end
   

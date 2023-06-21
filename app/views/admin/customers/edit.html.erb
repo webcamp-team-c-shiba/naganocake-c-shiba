@@ -4,13 +4,13 @@
       
       <h3><%= @customer.last_name + @customer.first_name %>さんの会員情報編集</h3>
       
+      <%= render 'layouts/errors', obj: @customer %>
+      <%= form_with model: @customer, url: admin_customer_path do |f| %>
       <table class="table">
         <tr>
           <th>会員ID</th>
           <td><%= @customer.id %></td>
         </tr>
-        
-        <%= form_with model: @customer, url: admin_customer_path do |f| %>
         <tr>
           <th>氏名</th>
           <td><%= f.text_field :last_name %></td>
