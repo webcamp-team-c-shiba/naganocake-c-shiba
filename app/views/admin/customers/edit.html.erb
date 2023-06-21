@@ -4,51 +4,53 @@
       
       <h3><%= @customer.last_name + @customer.first_name %>さんの会員情報編集</h3>
       
+
       <%= render 'layouts/errors', obj: @customer %>
       <%= form_with model: @customer, url: admin_customer_path do |f| %>
+
       <table class="table">
         <tr>
           <th>会員ID</th>
           <td><%= @customer.id %></td>
         </tr>
         <tr>
-          <th>氏名</th>
-          <td><%= f.text_field :last_name %></td>
-          <td><%= f.text_field :first_name %></td>
+          <th><label for="inputName">氏名</label></th>
+          <td><%= form.text_field :last_name %></td>
+          <td><%= form.text_field :first_name %></td>
         </tr>
         <tr>
-          <th>フリガナ</th>
-          <td><%= f.text_field :kana_last_name %></td>
-          <td><%= f.text_field :kana_first_name %></td>
+          <th><label for="inputName">フリガナ</label></th>
+          <td><%= form.text_field :kana_last_name %></td>
+          <td><%= form.text_field :kana_first_name %></td>
         </tr>
         <tr>
-          <th>郵便番号</th>
-          <td><%= f.text_field :postcode %></td>
+          <th><label for="inputCode">郵便番号</label></th>
+          <td><%= form.text_field :postcode %></td>
         </tr>
         <tr>
-          <th>住所</th>
-          <td><%= f.text_field :address %></td>
+          <th><label for="inputAddress">住所</label></th>
+          <td><%= form.text_field :address %></td>
         </tr>
         <tr>
-          <th>電話番号</th>
-          <td><%= f.text_field :phone_number %></td>
+          <th><label for="inputCode">電話番号</label></th>
+          <td><%= form.text_field :phone_number %></td>
         </tr>
         <tr>
-          <th>メールアドレス</th>
-          <td><%= f.text_field :email %></td>
+          <th><label for="inputEmail">メールアドレス</label></th>
+          <td><%= form.text_field :email %></td>
         </tr>
         <tr>
-          <th>会員ステータス</th>
+          <th><label for="inputStatus">会員ステータス</label></th>
           <td>
-            <%= f.radio_button :is_deleted, false %>
-            <%= f.label :is_deleted, "有効" %>
-            <%= f.radio_button :is_deleted, true %>
-            <%= f.label :is_deleted, "退会" %>
+            <%= form.radio_button :is_deleted, false %>
+            <%= form.label :is_deleted, "有効", value: false %>
+            <%= form.radio_button :is_deleted, true %>
+            <%= form.label :is_deleted, "退会", value: true %>
           </td>
         </tr>
       </table>
       
-      <%= f.submit "変更を保存", class: "btn btn-success" %>
+      <%= form.submit "変更を保存", class: "btn btn-success" %>
       
       <% end %>
       
