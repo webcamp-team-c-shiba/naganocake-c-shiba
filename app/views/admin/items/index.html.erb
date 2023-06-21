@@ -30,7 +30,7 @@
                   <span style="color: black;"><%= item.name %></span>
                 <% end %>
               </td>
-              <td><%= item.price %> 円</td>
+              <td><%= number_with_delimiter(item.price) %> 円</td>
               <td><%= item.genre.name %></td>
               <td>
                 <% if item.is_stopped %>
