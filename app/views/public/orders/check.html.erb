@@ -1,4 +1,70 @@
-<h1>注文情報確認画面</h1>
-
-
+<div class="container">
+    <h4 class="bg-light col-2 my-4">新規会員登録</h4>
+    <!--商品情報テーブル-->
+    <table class="table">
+        <thead>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+        </thead>
+        <tbody>
+            <!--商品合計用の変数設定-->
+            <% tatal_items_price = 0 %>
+            <!--1商品ずつの表示、計算-->
+            <%= @cart_items.each do |cart_item| %>
+                <tr>
+                    <td>
+                        <%= image_tag cart_item.item.get_item_image(150, 100) %>
+                        cart_item.item.name
+                    </td>
+                    <td>
+                        <% item_price_tax = cart_item.item.price.with_tax_price %>
+                        <%= item_price_tax %>
+                    </td>
+                    <td>
+                        <% total_item_price = item_price_tax * cart_item.amout %>
+                        <%= total_item_price %>
+                        <!--商品合計用の計算-->
+                        <% total_items_price += total_item_price %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    
+    <!--金額テーブル-->
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>送料</th>
+                <td><%= @shipping_fee %></td>
+            </tr>
+            <tr>
+                <th>商品合計</th>
+                <td><%= total_items_price %></td>
+            </tr>
+            <tr>
+                <th>請求金額</th>
+                <td>
+                    <% @payment = @shipping_fee + total_items_price %>
+                    <%= @payment %>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="row">
+        <h5 class="col">支払い方法</h5>
+        <p class="col"><%= key(@order.payment_methods) %></p>
+    </div>
+    
+    <div class="row">
+        <h5 class="col">お届け先</h5>
+        <p class="col"><%= @order.address %></p>
+    </div>
+    <div class="row">
+        <%= link_to "注文を確定する", orders_path, data: { method: :post }, class: "btn btn-successr px-3" %>
+    </div>
+</div>
 

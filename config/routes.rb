@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   
   
   scope module: :public do
-    get 'orders/check' => 'orders#check'
+    post 'orders/check' => 'orders#check'
     get 'orders/complete' => 'orders#complete'
     resource :orders, only: [:new, :create, :index, :show]
     

@@ -5,7 +5,13 @@ class Public::OrdersController < ApplicationController
   end
 
   def check
-    
+    # 仮--
+    @order = Order.new
+    @order.payment_method = 1
+    @order.address = "〒0000000 東京都　令和道子"
+    # 仮--
+    @cart_items = CartItem.where(customer_id: current_customer.id)
+    @shipping_fee = 800
   end
 
   def complete
