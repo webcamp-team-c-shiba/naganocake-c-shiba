@@ -1,0 +1,39 @@
+ja:
+    enums:
+        order:
+            payment_method:
+                credit_card: "クレジットカード"
+                transfer: "銀行振込"
+                
+
+ja:
+  activerecord:
+    models:
+      item: "商品"
+      customer: "顧客"
+      address: "配送先"
+      genre: "ジャンル"
+    attributes:
+      item:
+        genre_id: "ジャンル"
+        name: "商品名"
+        description: "商品説明"
+        price: "価格"
+      customer:
+        last_name: "姓"
+        first_name: "名"
+        kana_last_name: "セイ"
+        kana_first_name: "メイ"
+        postcode: "郵便番号"
+        address: "住所"
+        phone_number: "電話番号"
+        email: "メールアドレス"
+        encrypted_password: "パスワード"
+      address:
+        postcode: "郵便番号"
+        address: "住所"
+        name: "宛先"
+      genre:
+        name: "ジャンル名"
+
+

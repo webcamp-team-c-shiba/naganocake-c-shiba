@@ -16,6 +16,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #  @customer.save
   #  redirect_to "/"
   #end
+  
 
   # GET /resource/edit
   # def edit
@@ -31,6 +32,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def destroy
   #   super
   # end
+
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

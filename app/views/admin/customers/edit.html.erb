@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+      
+      <h3><%= @customer.last_name + @customer.first_name %>さんの会員情報編集</h3>
+      
+
+      <%= render 'layouts/errors', obj: @customer %>
+      <%= form_with model: @customer, url: admin_customer_path do |f| %>
+
+      <table class="table">
+        <tr>
+          <th>会員ID</th>
+          <td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <th><label for="inputName">氏名</label></th>
+          <td><%= form.text_field :last_name %></td>
+          <td><%= form.text_field :first_name %></td>
+        </tr>
+        <tr>
+          <th><label for="inputName">フリガナ</label></th>
+          <td><%= form.text_field :kana_last_name %></td>
+          <td><%= form.text_field :kana_first_name %></td>
+        </tr>
+        <tr>
+          <th><label for="inputCode">郵便番号</label></th>
+          <td><%= form.text_field :postcode %></td>
+        </tr>
+        <tr>
+          <th><label for="inputAddress">住所</label></th>
+          <td><%= form.text_field :address %></td>
+        </tr>
+        <tr>
+          <th><label for="inputCode">電話番号</label></th>
+          <td><%= form.text_field :phone_number %></td>
+        </tr>
+        <tr>
+          <th><label for="inputEmail">メールアドレス</label></th>
+          <td><%= form.text_field :email %></td>
+        </tr>
+        <tr>
+          <th><label for="inputStatus">会員ステータス</label></th>
+          <td>
+            <%= form.radio_button :is_deleted, false %>
+            <%= form.label :is_deleted, "有効", value: false %>
+            <%= form.radio_button :is_deleted, true %>
+            <%= form.label :is_deleted, "退会", value: true %>
+          </td>
+        </tr>
+      </table>
+      
+      <%= form.submit "変更を保存", class: "btn btn-success" %>
+      
+      <% end %>
+      
+    </div>
+  </div>
+</div>
