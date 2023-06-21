@@ -8,7 +8,7 @@ class Admin::GenresController < ApplicationController
     @genre = Genre.new(genre_params)
     if @genre.save
       redirect_to admin_genres_path, notice: 'ジャンルが作成されました。'
-    els
+    else
       @genres = Genre.all
       render :index
     end
