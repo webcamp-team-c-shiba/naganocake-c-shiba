@@ -2,7 +2,7 @@ class Public::CartItemsController < ApplicationController
   before_action :authenticate_customer!
   
   def index
-    @cart_items = CartItem.all
+    @cart_items = CartItem.where(customer_id: current_customer.id)
     @total_price = 0
   end
   
