@@ -5,11 +5,6 @@ class Public::OrdersController < ApplicationController
   end
 
   def check
-    # 仮--
-    @order = Order.new
-    @order.payment_method = 1
-    @order.address = "〒0000000 東京都　令和道子"
-    # 仮--
     @cart_items = CartItem.where(customer_id: current_customer.id)
     @shipping_fee = 800
   end
@@ -19,7 +14,6 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    byebug
     @order = Order.new(order_params, customer_id: current_user.id, shipping_fee: @shipping_fee)
     if @orer.save
         @order_items.each do |order_item|
