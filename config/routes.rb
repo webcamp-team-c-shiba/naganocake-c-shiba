@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   root to:'public/homes#top'
   get 'about' => 'public/homes#about'
   
@@ -22,14 +22,14 @@ Rails.application.routes.draw do
     end
   end
 
-
   
   namespace :admin do
     get '/' => 'homes#top'
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, except: [:destroy]
     resources :customers, only: [:index, :show, :edit, :update]
-
+    resources :orders, only: [:index, :show, :update]
+    resources :order_items, only: [:update]
   end
   
   devise_for :admin, skip: [:passwords] , controllers: {
