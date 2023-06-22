@@ -64,7 +64,7 @@
         <h5 class="col">お届け先</h5>
         <p class="col"><%= @order.address %></p>
     </div>
-    <!--各種データ送信フォーム(ボタン以外は表示せず-->
+    <!--各種データ送信フォーム(ボタン以外は表示せず）-->
     <%= form_with model: @order, url: orders_path do |f| %>
         <%= f.hidden_field :address, :value => @order.address %>
         <%= f.hidden_field :postcode, :value => @order.postcode %>
@@ -72,7 +72,7 @@
         <%= f.hidden_field :payment_method, :value => @order.payment_method %>
         <%= f.hidden_field :shipping_fee, :value => @shipping_fee %>
         <%= f.hidden_field :payment, :value => payment %>
-        <%= f.submit "注文を確定する", class: "btn btn-successr px-3" %>
+        <%= f.submit "注文を確定する", class: "btn btn-success px-3" %>
     <% end %>
 </div>
 
