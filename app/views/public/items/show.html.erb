@@ -17,7 +17,7 @@
     <td><%= @item.description %></td>
   </tr>
   <tr>
-    <td>¥<%= @item.with_tax_price %>(税込)</td>
+    <td>¥<%= number_with_delimiter(@item.with_tax_price) %>(税込)</td>
   </tr>
   </table>
   <%= form_with model: @cart_item,url: cart_items_path do |f| %>
@@ -25,7 +25,6 @@
   <%= f.hidden_field :item_id, :value => @item.id %>
   <%= f.submit  "カートに入れる", class: 'btn btn-success' %>
   <% end %>
-
 
  </div>
 </div>

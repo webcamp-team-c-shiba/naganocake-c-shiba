@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   scope module: :public do
     post 'orders/check' => 'orders#check'
     get 'orders/complete' => 'orders#complete'
-    resource :orders, only: [:new, :create, :index, :show]
+    resources :orders, only: [:new, :create, :index, :show]
     
     resources :addresses, except: [:show]
     
@@ -16,8 +16,10 @@ Rails.application.routes.draw do
     patch 'customers/withdrawal' => "customers#withdrawal"
     
     resources :items, only: [:index,:show]
-    resources :cart_items, only: [:index,:create,:destroy,:update]
-    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
+    
+    resources :cart_items, only: [:index,:create,:destroy,:update] do
+      delete 'destroy_all', on: :collection
+    end
   end
 
 
@@ -26,9 +28,12 @@ Rails.application.routes.draw do
     get '/' => 'homes#top'
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, except: [:destroy]
+    resources :customers, only: [:index, :show, :edit, :update]
+
   end
   
-  devise_for :admin, skip: [:registrations, :passwords] , controllers: {
+  devise_for :admin, skip: [:passwords] , controllers: {
+    registrations: "admin/registrations",
     sessions: "admin/sessions"
   }
 

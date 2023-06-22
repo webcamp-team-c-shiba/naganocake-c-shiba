@@ -1,4 +1,6 @@
 class Public::AddressesController < ApplicationController
+  before_action :authenticate_customer!
+  
   def index
     @addresses = Address.where(customer_id: current_customer.id)
     @address = Address.new
@@ -13,6 +15,7 @@ class Public::AddressesController < ApplicationController
     @address.customer_id = current_customer.id
     if @address.save
       @addresses = Address.where(customer_id: current_customer.id)
+      flash[:info] = "配送先が登録されました。"
       redirect_to addresses_path
     else
       @addresses = Address.where(customer_id: current_customer.id)
@@ -23,6 +26,7 @@ class Public::AddressesController < ApplicationController
   def update
     @address = Address.find(params[:id])
     if @address.update(address_params)
+      flash[:success] = "配送先情報が更新されました。"
       redirect_to addresses_path
     else
       render :edit
