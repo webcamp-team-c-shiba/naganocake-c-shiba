@@ -1,48 +1,76 @@
-<div class="container">
- <div class="row">
-  <div class="mx-auto">
-
-  <h4>ショッピングカート</h4>
-  <div class="text-right">
-   <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, data: { confirm: "カート内商品を全て削除しますか？" }, class: 'btn btn-danger' %>
-   </div>
-   <table class="w-100 table">
-     <tr>
-       <th>商品名</th>
-       <th>単価（税込）</th>
-       <th>数量</th>
-       <th>小計</th>
-       <th></th>
-      </tr>
-      <% @cart_items.each do |cart_item| %>
-      <tr>
-       <td><%= image_tag cart_item.item.image,size:"60x50" %><%= cart_item.item.name %></td>
-       <td><%= number_with_delimiter(cart_item.item.with_tax_price) %></td>
-       <td>
-
-           <%= form_with model: cart_item, url: cart_item_path(cart_item.id) do |f| %>
-
-           <%= f.select :amount, *[1..10] %>
-           <%= f.submit  "変更", class: 'btn btn-success' %>
-           <% end %>
-       </td>
-       <td><%= number_with_delimiter(cart_item.subtotal) %></td>
-       <td><% if cart_item.customer == current_customer %>
-             <%= link_to "削除する", cart_item_path(cart_item),method: :delete, class: 'btn btn-danger' %>
-           <% end %>
-       </td>
-       <td></td>
-       <% @total_price += cart_item.subtotal %>
-      </tr>
-      <% end %>
-    </table>
-    <%= link_to "買い物を続ける", root_path,class: 'btn btn-primary' %>
-    <div class="text-right">合計金額 <%= number_with_delimiter(@total_price) %></div>
-
-    <% if @cart_items.present? %>
-      <%= link_to "情報入力に進む", new_orders_path, class: 'btn btn-success' %>
-    <% end %>
-
+<div class="container my-4">
+  <div class="d-flex align-items-center my-3">
+    <div class="col col-7 col-sm-6 col-md-5 col-lg-4 col-xl-3 px-2">
+      <h5 class="bg-light text-center ml-5 my-0">ショッピングカート</h5>
+    </div>
+    <div class="ml-auto mr-2">
+      <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, data: { confirm: "カート内商品を全て削除しますか？" }, class: 'btn-sm px-3 btn btn-danger' %>
+    </div>
   </div>
- </div>
+  
+  <div class="">
+  <table class="table table-bordered table-hover">
+    <thead class="bg-light">
+      <tr>
+        <th>商品名</th>
+        <th>単価（税込）</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td>
+            <%= image_tag cart_item.item.image, size: "60x50" %>
+            <%= cart_item.item.name %>
+          </td>
+          <td>
+            <%= number_with_delimiter(cart_item.item.with_tax_price) %>
+          </td>
+          <td>
+              <%= form_with model: cart_item, url: cart_item_path(cart_item.id) do |f| %>
+              <div class="cart-item-mount">
+                <%= f.select :amount, *[1..10], {}, class: "form-control px-0 px-1 pt-0" %>
+              </div>
+              <div class="cart-item-mount ml-lg-2">
+                <%= f.submit "変更", class: 'btn btn-success m-lg-0 mt-1' %>
+              </div>
+              <% end %>
+          </td>
+          <td><%= number_with_delimiter(cart_item.subtotal) %></td>
+          <td>
+            <% if cart_item.customer == current_customer %>
+              <%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: 'btn btn-danger px-2' %>
+            <% end %>
+          </td>
+        </tr>
+        <% @total_price += cart_item.subtotal %>
+      <% end %>
+    </tbody>
+  </table>
+    
+    <div class="row">
+      <div class="col-lg-3 ml-lg-5">
+        <%= link_to "買い物を続ける", root_path,class: 'btn btn-primary mt-2 mb-lg-0 mb-2' %>
+      </div>
+      <div class="col-lg-5">
+      </div>
+      <div class="col-lg-3 col-6 ml-lg-4">
+        <table class="table table-bordered table-hover">
+          <tr>
+            <th class="bg-light">合計金額</th>
+            <td><%= number_with_delimiter(@total_price) %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-12 d-flex justify-content-center mt-3">
+        <% if @cart_items.present? %>
+          <%= link_to "情報入力に進む", new_orders_path, class: 'btn btn-success px-4' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
