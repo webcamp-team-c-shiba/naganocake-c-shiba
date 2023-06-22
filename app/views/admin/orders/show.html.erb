@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="mx-auto">
-      
+
       <h3>注文履歴詳細</h3>
       <table>
         <tr>
@@ -23,16 +23,16 @@
         <tr>
           <th>注文ステータス</th>
           <th>
-            <%= form_with model: @orders, url: cart_item_path(cart_item.id) do |f| %>
-            <%= f.select :status, *[0..4] %>
-            <%= f.submit  "更新", class: 'btn btn-success' %>
+            <%= form_with model: @selected_order, url: admin_order_path, method: :patch, local: true do |f| %>
+            <%= f.select :order_status, Order.order_statuses.keys, class: "order_status" %>
+          </th>
+          <th><%= f.submit  "更新", class: 'btn btn-success' %>
             <% end %>
-           </th>
+          </th>
         </tr>
       </table>
-        
+
       <table class="table">
-        #each分を使う
         <header>
           <th>商品名</th>
           <th>単価（税込）</th>
@@ -40,16 +40,29 @@
           <th>小計</th>
           <th>製作ステータス</th>
         </header>
+        
+        
+        <% @selected_order.order_items.each do |selected_order_item| %>
         <tr>
-          <th><#%= ジャンル %></th>
-          <th><#%= 単価 %></th>
-          <th><#%= 数量 %></th>
-          <th><#%= 小計 %></th>
-          <th><#%= 製作ステータス %></th>
-          <th><#%= 更新ボタン %></th>
-        </tr>
+          <td><%= selected_order_item.item.name %></td>
+          <td><%= number_with_delimiter((selected_order_item.item.with_tax_price).to_i) %></td>
+          <td><%= selected_order_item.amount %></td>
+          <td><%= number_with_delimiter(selected_order_item.item.price) %></td>
+          
+          <td>
+            <%= form_with model: selected_order_item, url: admin_order_path, method: :patch, local: true do |f| %>
+            <%= f.select :product_status, Order.product_statuses.keys, class: "product_status" %>
+            <%= f.submit  "更新", class: 'btn btn-success' %>
+            <% end %>
+          </td>
+            
+          
+        
+         </tr>
+         
+        <% end %>
       </table>
-       
+
       <table>
         <tr>
           <th>商品合計</th>
@@ -64,7 +77,7 @@
           <th>〇円</th>
         </tr>
       </table>
-      
+
     </div>
   </div>
 </div>
