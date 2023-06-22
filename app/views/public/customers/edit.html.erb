@@ -1,5 +1,6 @@
 <div class="container">
   <h3 class="my-3 ml-5">会員情報編集</h3>
+  <%= render 'layouts/errors', obj: @customer %>
   <%= form_with(model: @customer, url: customers_path(@customer), method: :patch) do |f| %>
     <form>
       <div class="form-group row ml-3">
