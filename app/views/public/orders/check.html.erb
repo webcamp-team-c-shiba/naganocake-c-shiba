@@ -1,5 +1,5 @@
 <div class="container">
-    <h4 class="bg-light col-2 my-4">新規会員登録</h4>
+    <h4 class="bg-light col-2 my-4">注文情報確認</h4>
     <!--商品情報テーブル-->
     <table class="table table-bordered">
         <thead>
@@ -19,15 +19,15 @@
                         <%= cart_item.item.name %>
                     </td>
                     <td>
-                        <%= cart_item.item.with_tax_price %>
+                        <%= number_with_delimiter(cart_item.item.with_tax_price) %> 円
                     </td>
                     <td>
                         <%= cart_item.amount %>
                     </td>
                     <td>
-                        <%= cart_item.subtotal %>
+                        <%= number_with_delimiter(cart_item.subtotal) %> 円
                         <!--商品合計用の計算-->
-                        <% total = cart_item.subtotal %>
+                        <% total = total + cart_item.subtotal %>
                     </td>
                 </tr>
             <% end %>
@@ -39,17 +39,17 @@
         <tbody>
             <tr>
                 <th>送料</th>
-                <td><%= @shipping_fee %></td>
+                <td><%= number_with_delimiter(@shipping_fee) %> 円</td>
             </tr>
             <tr>
                 <th>商品合計</th>
-                <td><%= total %></td>
+                <td><%= number_with_delimiter(total) %> 円</td>
             </tr>
             <tr>
                 <th>請求金額</th>
                 <td>
-                    <% @payment = @shipping_fee + total %>
-                    <%= @payment %>
+                    <% payment = @shipping_fee + total %>
+                    <%= number_with_delimiter(payment) %> 円
                 </td>
             </tr>
         </tbody>
@@ -64,10 +64,15 @@
         <h5 class="col">お届け先</h5>
         <p class="col"><%= @order.address %></p>
     </div>
-    <div class="row">
-        <% form_with model: @order, url: orders_path %>
-            <% f.submit "注文を確定する", class: "btn btn-successr px-3" %>
-        <% end %>
-    </div>
+    <!--各種データ送信フォーム(ボタン以外は表示せず-->
+    <%= form_with model: @order, url: orders_path do |f| %>
+        <%= f.hidden_field :address, :value => @order.address %>
+        <%= f.hidden_field :postcode, :value => @order.postcode %>
+        <%= f.hidden_field :name, :value => @order.name %>
+        <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+        <%= f.hidden_field :shipping_fee, :value => @shipping_fee %>
+        <%= f.hidden_field :payment, :value => payment %>
+        <%= f.submit "注文を確定する", class: "btn btn-successr px-3" %>
+    <% end %>
 </div>
 

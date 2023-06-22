@@ -123,9 +123,9 @@ ActiveRecord::Schema.define(version: 2023_06_21_040843) do
     t.string "postcode", null: false
     t.string "address", null: false
     t.string "name", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "status", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
