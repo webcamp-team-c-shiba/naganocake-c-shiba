@@ -62,7 +62,11 @@
     
     <div class="row">
         <h5 class="col">お届け先</h5>
-        <p class="col"><%= @order.address %></p>
+        <p class="col">
+        〒<%= @order.postcode %>
+        <%= @order.address %>
+        <%= @order.name %>
+        </p>
     </div>
     <!--各種データ送信フォーム(ボタン以外は表示せず）-->
     <%= form_with model: @order, url: orders_path do |f| %>

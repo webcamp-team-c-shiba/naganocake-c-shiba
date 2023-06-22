@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+    has_many :cart_items
+    has_many :items, through: :cart_items
     
     has_many :order_items, dependent: :destroy
     has_many :item, through: :order_items

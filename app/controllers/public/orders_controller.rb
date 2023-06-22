@@ -1,15 +1,36 @@
 class Public::OrdersController < ApplicationController
-  
   before_action :authenticate_customer!
+
   def new
     @order = Order.new
     @customer = Customer.find(current_customer.id)
   end
 
   def check
-    # 仮
-    @order = Order.new(address: "東京", postcode: "0000000", name: "令和道子", payment_method: 1)
-    #仮
+    @order = Order.new(order_params)
+    if params[:order][:address_option] == "0"
+      @order.postcode = current_customer.postcode
+      @order.address = current_customer.address
+      @order.name = current_customer.first_name + current_customer.last_name
+      
+    elsif params[:order][:address_option] == "1"
+      @addresses = Address.all
+      @selected_address = Address.find(params[:order][:customer_id])
+      @address_id = @selected_address.id
+      @order.postcode = postcode
+      @order.address = address
+      @order.name = name 
+      
+    elsif params[:order][:address_option] = "2"
+      @order.postcode = params[:order][:postcode]
+      @order.address = params[:order][:address]
+      @order.name = params[:order][:name]
+      
+    else
+      render 'new'
+    end
+
+    cart_items = current_customer.cart_items
     @cart_items = CartItem.where(customer_id: current_customer.id)
     @shipping_fee = 800
   end

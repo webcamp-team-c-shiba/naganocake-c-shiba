@@ -11,20 +11,22 @@
 
         <h5>お届け先</h5>
         <div class="form-check">
-            <%= f.radio_button :address, @customer.address, class: "form-check-input" %>
-            <%= f.label :address, value: @customer.address, class: "form-check-label" do %>
+            <%= f.radio_button :address_option, 0, class: "form-check-input" %>
+            <%= f.label :address_option, value: 0, class: "form-check-label" do %>
                 <h6>ご自身の住所</h6>
-                <%= @customer.address %>
+                〒<%= current_customer.postcode %>
+                  <%= current_customer.address %><br>
+                  <%= current_customer.last_name %><%= current_customer.first_name %>
             <% end%>
             <br>
-            <%= f.radio_button :address, @customer.address, class: "form-check-input" %>
-            <%= f.label :address, value: @customer.address, class: "form-check-label" do %>
+            <%= f.radio_button :address_option, 1, class: "form-check-input" %>
+            <%= f.label :address_option, value: 1, class: "form-check-label" do %>
                 <h6>登録済住所から選択</h6>
                 <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
             <% end%>
             <br>
-            <%= f.radio_button :address, @customer.address, class: "form-check-input" %>
-            <%= f.label :address, value: @customer.address, class: "form-check-label" do %>
+            <%= f.radio_button :address_option, 2, class: "form-check-input" %>
+            <%= f.label :address_option, value: 2, class: "form-check-label" do %>
                 <h6>新しいお届け先</h6>
                   <tr>
                     <th>郵便番号(ハイフンなし)</th>
@@ -39,10 +41,6 @@
                     <th><%= f.text_field :name, class:"form-control", placeholder:"令和道子" %></th>
                   </tr>
             <% end%>
-        </div>
+            <%= f.submit "確認画面へ進む" %>    
     <% end %>
-  
-  <div class="text-center">
-    <%= link_to "確認画面へ進む", orders_check_path, data: {method: :post }, class: "btn btn-primary" %>
-  </div>
 </div>
