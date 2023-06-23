@@ -32,7 +32,7 @@
             </td>
             <td><%= number_with_delimiter(order.payment) %>円</td>
             <td><%= Order.statuses_i18n[order.status] %></td>
-            <td><%= link_to "表示する", order_path(order), class: "btn btn-sm btn-primary" %></td>
+            <td class="text-center"><%= link_to "表示する", order_path(order), class: "btn btn-sm btn-primary" %></td>
           </tr>
           <% end %>
         </tbody>
