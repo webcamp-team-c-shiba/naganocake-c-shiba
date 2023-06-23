@@ -35,8 +35,15 @@ class Public::CartItemsController < ApplicationController
     else
       @cart_item = CartItem.new(cart_item_params)
       @cart_item.customer_id = current_customer.id
-      @cart_item.save
-      flash[:info] = "商品をカートに追加しました。"
+      if @cart_item.amount.to_i > 0 && @cart_item.save
+        @cart_item.save
+        flash[:info] = "商品をカートに追加しました。"
+      else
+        @cart_item.save
+        flash[:warning] = "個数選択をしてください"
+        redirect_to item_path(params[:cart_item][:item_id])
+        return
+      end
     end
     redirect_to cart_items_path
   end
