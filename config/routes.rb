@@ -27,8 +27,9 @@ Rails.application.routes.draw do
     get '/' => 'homes#top'
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, except: [:destroy]
-    resources :customers, only: [:index, :show, :edit, :update]
-    resources :orders, only: [:index, :show, :update]
+    resources :customers, only: [:index, :show, :edit, :update] 
+    resources :orders, only: [:show, :update]
+    get '/orders/:customer_id/index', to: 'orders#customer_index', as: 'customer_orders'
     resources :order_items, only: [:update]
   end
   
