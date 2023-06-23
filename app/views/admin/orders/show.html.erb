@@ -7,7 +7,7 @@
       <table>
         <tr>
           <th>購入者</th>
-          <th><%= @customer.last_name + @customer.first_name %></th>
+          <th><u><%= link_to @customer.last_name + @customer.first_name, admin_customer_path(@customer), class: "text-reset" %></u></th>
         </tr>
         <tr>
           <th>注文日</th>

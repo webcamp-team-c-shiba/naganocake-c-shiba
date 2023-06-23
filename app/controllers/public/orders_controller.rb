@@ -33,8 +33,7 @@ class Public::OrdersController < ApplicationController
     else
       render 'new'
     end
-
-    cart_items = current_customer.cart_items
+    
     @cart_items = CartItem.where(customer_id: current_customer.id)
     @shipping_fee = 800
   end
