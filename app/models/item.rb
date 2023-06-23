@@ -23,5 +23,10 @@ class Item < ApplicationRecord
   def with_tax_price
     (price * 1.1).floor
   end
+  
+  # ヘッダーの検索機能
+  def self.looks(word)
+    Item.where('name LIKE?', "%#{word}%" )
+  end
 
 end
