@@ -1,8 +1,9 @@
 class Admin::OrdersController < ApplicationController
-  def index
-    @orders = Order.all.order(created_at: :desc) 
+  def customer_index
+    @orders = Order.where(customer_id: params[:customer_id]).page(params[:page]).per(10)
+    @customer = Customer.find(params[:customer_id])
   end
-
+  
   def show
   end
   

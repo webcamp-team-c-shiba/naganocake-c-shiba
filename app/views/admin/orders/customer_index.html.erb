@@ -1,12 +1,12 @@
 <div class="container my-4 px-sm-0">
-    <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 px-2 ml-md-5">
-        <h5 class="bg-light text-center ml-5">注文履歴一覧</h5> 
+    <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 px-2 ml-md-5">
+        <h5 class="bg-light text-center ml-5"><%= @customer.last_name + @customer.first_name %>さんの注文履歴</h5> 
       </div>
+      <!--履歴テーブル-->
       <div class="col-sm-12 col-md-11 col-lg-10 col-xl-8 px-sm-0 px-md-1">
           <table class="table">
               <thead>
                   <th>購入日時</th>
-                  <th>購入者</th>
                   <th>注文個数</th>
                   <th>注文ステータス</th>
               </thead>
@@ -14,7 +14,6 @@
                   <% @orders.each do |order| %>
                       <tr>
                           <td><u><%= link_to order.created_at.strftime("%Y/%m/%d %H:%M:%S"), admin_order_path(order), class: "text-reset " %></u></td>
-                          <td><%= order.name %></td>
                           <td>
                               <%= OrderItem.where(order_id: order.id).pluck(:amount).sum %>
                           </td>
@@ -24,4 +23,5 @@
               </tbody>
           </table>
       </div>
+      <%= paginate @orders, theme: 'bootstrap-5' %>
 </div>
