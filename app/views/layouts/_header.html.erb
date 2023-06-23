@@ -61,8 +61,18 @@
               </li>
 
             <% end %>
-
           </ul>
+          
+          <!--検索フォーム-->
+          <div class="form-inline my-1 float-right">
+            <%= form_with url: search_path, method: :get, local: true do |f| %>
+              <%= f.text_field :word, placeholder: "Search", class: "form-control" %>
+              <button class="btn btn-success" type="submit">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            <% end %>
+          </div>
+          
         </div>
     </div>
 </header>

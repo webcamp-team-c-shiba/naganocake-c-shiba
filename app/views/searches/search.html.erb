@@ -1,0 +1,69 @@
+<div class="container my-4  px-sm-0">
+  <div class="row justify-content-center">
+    <table class="table border table-hover table-inverse">
+      
+      <% if @word.empty? %>
+        <h4>検索結果はありませんでした。</h4>
+        <p>(全0件)</p>
+      <% else %>
+        <h4>"<%= @word %>"の検索結果</h4>
+        <p>(全<%= @records.count %>件)</p>
+        
+      <thead>
+        <tr>
+          <th>商品画像</th>
+          <th>商品名</th>
+          <th>価格(税込)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        <% @records.each do |item| %>
+        
+          <% if customer_signed_in? %>
+            <td>
+              <%= link_to item_path(item) do %>
+                <% if item.image.attached? %>
+                  <%= image_tag item.get_item_image(150, 100) %>
+                <% end %>
+            </td>
+            <td><%= link_to item.name, item_path(item) %></td>
+              <% end %>
+              
+              <% elsif admin_signed_in? %>
+                <td>
+                  <%= link_to admin_item_path(item) do %>
+                    <% if item.image.attached? %>
+                      <%= image_tag item.get_item_image(150, 100) %>
+                    <% end %>
+                </td>
+                <td><%= item.name %></td>
+                  <% end %>
+              
+              <% else %>
+                <td>
+                  <%= link_to item_path(item) do %>
+                    <% if item.image.attached? %>
+                      <%= image_tag item.get_item_image(150, 100) %>
+                    <% end %>
+                </td>
+                <td/><%= item.name %></td>
+                  <% end %>
+              <% end %>  
+            
+            <td><div>¥<%= item.price.to_s(:delimited) %></div></td>
+            
+        </tr>
+        <% end %>
+        
+      <% if @records.empty? %>
+        <div class="text-center">
+          <h4>該当する商品はありません。</h4>
+        </div>
+      <% end %>
+      
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
