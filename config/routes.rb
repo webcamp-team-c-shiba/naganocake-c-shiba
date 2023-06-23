@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     patch 'customers/withdrawal' => "customers#withdrawal"
     
     resources :items, only: [:index,:show]
+    get 'genres/search' => 'genres#search'
     
     resources :cart_items, only: [:index,:create,:destroy,:update] do
       delete 'destroy_all', on: :collection
