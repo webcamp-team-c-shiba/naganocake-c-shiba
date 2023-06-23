@@ -1,7 +1,7 @@
 <header class="shadow-sm">
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand p-3" href="/">ながのCAKE</a>
+      <a class="navbar-brand p-4" href="/">ながのCAKE</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -14,57 +14,56 @@
                <p class="text-center">
                  ようこそ、<%= current_customer.last_name + current_customer.first_name %>さん！
                </p>
-               <li class="nav-item">
-                 <%= link_to "マイページ",customers_path, class: 'nav-link text-dark' %>
+               <li class="nav-item mx-1">
+                 <%= link_to "マイページ",customers_path, class: 'nav-link text-dark btn btn-outline-light' %>
                </li>
-               <li class="nav-item">
-                 <%= link_to "商品一覧",items_path, class: 'nav-link text-dark'  %>
+               <li class="nav-item mx-1">
+                 <%= link_to "商品一覧",items_path, class: 'nav-link text-dark btn btn-outline-light' %>
                </li>
-               <li class="nav-item">
-                 <%= link_to "カート",cart_items_path, class: 'nav-link text-dark'  %>
+               <li class="nav-item mx-1">
+                 <%= link_to "カート",cart_items_path, class: 'nav-link text-dark btn btn-outline-light'  %>
                </li>
-               <li class="nav-item">
-                 <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %>
+               <li class="nav-item mx-1">
+                 <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark btn btn-outline-light' %>
                </li>
 
-               <!--管理者ログイン時-->
+            <!--管理者ログイン時-->
             <% elsif admin_signed_in? %>
-              <li class="nav-item">
-                <%= link_to "商品一覧",admin_items_path, class: 'nav-link text-dark' %>
+              <li class="nav-item mx-1">
+                <%= link_to "商品一覧",admin_items_path, class: 'nav-link text-dark btn btn-outline-light' %>
               </li>
-              <li class="nav-item">
-                <%= link_to "会員一覧",admin_customers_path, class: 'nav-link text-dark' %>
+              <li class="nav-item mx-1">
+                <%= link_to "会員一覧",admin_customers_path, class: 'nav-link text-dark btn btn-outline-light' %>
               </li>
-              <li class="nav-item">
-                <%= link_to "注文履歴一覧",admin_path, class: 'nav-link text-dark' %>
+              <li class="nav-item mx-1">
+                <%= link_to "注文履歴一覧",admin_path, class: 'nav-link text-dark btn btn-outline-light' %>
               </li>
-              <li class="nav-item">
-                <%= link_to "ジャンル一覧",admin_genres_path, class: 'nav-link text-dark' %>
+              <li class="nav-item mx-1">
+                <%= link_to "ジャンル一覧",admin_genres_path, class: 'nav-link text-dark btn btn-outline-light' %>
               </li>
-              <li class="nav-item">
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+              <li class="nav-item mx-1">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark btn btn-outline-light' %>
               </li>
 
-　　　　　　　　<!--登録時-->
+　　　　　　<!--登録時-->
             <% else %>
-              <li class="nav-item">
-                <%= link_to "About", about_path, class: 'nav-link text-dark' %>
+              <li class="nav-item mx-1">
+                <%= link_to "About", about_path, class: 'nav-link text-dark btn btn-outline-light' %>
               </li>
-              <li class="nav-item">
-                <%= link_to "商品一覧",items_path, class: 'nav-link text-dark' %>
+              <li class="nav-item mx-1">
+                <%= link_to "商品一覧",items_path, class: 'nav-link text-dark btn btn-outline-light' %>
               </li>
-              <li class="nav-item">
-                <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-dark' %>
+              <li class="nav-item mx-1">
+                <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-dark btn btn-outline-light' %>
               </li>
-              <li class="nav-item">
-                <%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-dark' %>
+              <li class="nav-item mx-1">
+                <%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-dark btn btn-outline-light' %>
               </li>
-
             <% end %>
           </ul>
           
           <!--検索フォーム-->
-          <div class="form-inline my-1 float-right">
+          <div class="form-inline my-1 float-right ml-4">
             <%= form_with url: search_path, method: :get, local: true do |f| %>
               <%= f.text_field :word, placeholder: "Search", class: "form-control" %>
               <button class="btn btn-success" type="submit">
