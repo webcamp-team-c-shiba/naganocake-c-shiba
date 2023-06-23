@@ -2,8 +2,13 @@ class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
 
   def new
-    @order = Order.new
-    @customer = Customer.find(current_customer.id)
+    if CartItem.where(customer_id: current_customer.id).count == 0 
+      flash[:danger] = "カート内に商品がありません"
+      redirect_to items_path
+    else
+      @order = Order.new
+      @customer = Customer.find(current_customer.id)
+    end
   end
 
   def check
@@ -56,7 +61,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.where(customer_id: current_customer.id)
+    @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show
