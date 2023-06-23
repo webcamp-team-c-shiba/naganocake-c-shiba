@@ -14,3 +14,14 @@
 .container table td {
   vertical-align: middle;
 }
+
+.link-black a {
+  color: black;
+  text-decoration: underline;
+}
+
+.link-black a:hover {
+  color: black;
+  text-decoration: none;
+}
+

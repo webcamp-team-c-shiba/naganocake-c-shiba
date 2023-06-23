@@ -1,0 +1,70 @@
+class Admin::OrdersController < ApplicationController
+
+ def index
+
+ end
+
+
+
+ def show
+
+  @customer = Customer.find(order_customer.id)
+
+  @selected_order = Order.find(params[:id])
+
+  @selected_order_items = @selected_order.items
+
+  @order = @selected_order.order
+
+ 
+
+ end
+
+  
+
+ def update
+
+  @order = Order.find(params[:id])
+
+  if @order.update(order_params)
+
+   flash[:success] = "ステータスが更新されました。"
+
+   redirect_to admin_order_path(@order)
+
+  else
+
+   flash[:danger] = "未記入項目があります。"
+
+   render :show
+
+  end
+
+   
+
+ #  order = Order.find(params[:id])
+
+ #  order.update(order_params)
+
+ #   if order.order_status == "入金確認"
+
+ #    order_details.update_all
+
+ #   end
+
+ end
+
+
+
+ private
+
+  def order_params
+
+   params.require(:order).permit(:order_status)
+
+  end
+
+  
+
+end
+
