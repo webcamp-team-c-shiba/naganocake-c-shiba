@@ -3,6 +3,7 @@
     <div class="mx-auto">
 
       <h3>注文履歴詳細</h3>
+      <%= form_with model: @selected_order, url: admin_order_path, local: true do |f| %>
       <table>
         <tr>
           <th>購入者</th>
@@ -22,15 +23,15 @@
         </tr>
         <tr>
           <th>注文ステータス</th>
-          <th>
-            <%= form_with model: @selected_order, url: admin_order_path, method: :patch, local: true do |f| %>
-            <%= f.select :order_status, Order.order_statuses.keys, class: "order_status" %>
-          </th>
-          <th><%= f.submit  "更新", class: 'btn btn-success' %>
-            <% end %>
-          </th>
+          <td>
+            
+            <%= f.select :status, ["入金待ち", "入金確認","製作中","発送準備中","発送済"], class: "status" %>
+            <%= f.submit "更新", class: 'btn btn-success' %>
+            
+          </td>
         </tr>
       </table>
+      <% end %>
 
       <table class="table">
         <header>
@@ -50,8 +51,8 @@
           <td><%= number_with_delimiter(selected_order_item.item.price) %></td>
           
           <td>
-            <%= form_with model: selected_order_item, url: admin_order_path, method: :patch, local: true do |f| %>
-            <%= f.select :product_status, Order.product_statuses.keys, class: "product_status" %>
+            <%= form_with model: selected_order_item, url: admin_order_item_path(selected_order_item), method: :patch, local: true do |f| %>
+            <%= f.select :status, ["着手不可", "製作待ち","製作中","製作完了"], class: "status" %>
             <%= f.submit  "更新", class: 'btn btn-success' %>
             <% end %>
           </td>
@@ -63,22 +64,31 @@
         <% end %>
       </table>
 
-      <table>
-        <tr>
-          <th>商品合計</th>
-          <th>〇円</th>
-        </tr>
-        <tr>
-          <th>送料</th>
-          <th>〇円</th>
-        </tr>
-        <tr>
-          <th>請求金額合計</th>
-          <th>〇円</th>
-        </tr>
-      </table>
-
+  </div>
+    <div class="col-xs-4">
+      <div>
+        <p>
+          <strong class="col-xs-3">商品合計</strong>
+          ¥<%= (@selected_order.payment - @selected_order.shipping_fee).to_s(:delimited)%>
+        </p>
+      </div>
+      <br>
+  
+      <div>
+        <p>
+          <strong class="col-xs-2">送料</strong>
+          ¥<%= @selected_order.shipping_fee.to_s(:delimited)%>
+        </p>
+      </div>
+      <br>
+  
+      <div>
+        <p>
+          <strong class="col-xs-4">請求金額合計</strong>
+          ¥<%= @selected_order.payment.to_s(:delimited) %>
+        </p>
+      </div>
+      <br>
     </div>
   </div>
 </div>
-
