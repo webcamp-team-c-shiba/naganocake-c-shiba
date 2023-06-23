@@ -3,9 +3,9 @@ class Public::ItemsController < ApplicationController
   def index
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-      @items = @genre.items.where(is_stopped: false).page(params[:page]).per(12)
+      @items = @genre.items.where(is_stopped: false).page(params[:page]).per(8)
     else
-      @items = Item.where(is_stopped: false).page(params[:page]).per(12)
+      @items = Item.where(is_stopped: false).page(params[:page]).per(8)
     end
     @genres = Genre.all
   end

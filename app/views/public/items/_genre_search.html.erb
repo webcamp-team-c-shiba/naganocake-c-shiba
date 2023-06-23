@@ -6,7 +6,7 @@
     <td>
       <div class="d-flex flex-column">
         <% @genres.each do |genre| %>
-          <%= link_to items_path(genre_id: genre.id), class: "text-dark pt-sm-3" do %>
+          <%= link_to items_path(genre_id: genre.id), class: "text-dark pt-lg-3 pt-sm-2 pt-1" do %>
             <%= genre.name %>
           <% end %>
         <% end %>
