@@ -8,12 +8,12 @@ class Admin::OrderItemsController < ApplicationController
   order = Order.find(@order_item.order_id)
 
     if @order_item.update(order_item_params)
-      if @order_item.status == "製作中"
-        order.status = "製作中"
+      if @order_item.status == OrderItem.statuses.key(2)
+        order.status = Order.statuses.key(2)
         order.save
-      elsif @order_item.status == "製作完了"
-        if OrderItem.where(order_id: order.id).count == OrderItem.where(order_id: order.id, status: "製作完了" ).count
-           order.status = "発送準備中"
+      elsif @order_item.status == OrderItem.statuses.key(3)
+        if OrderItem.where(order_id: order.id).count == OrderItem.where(order_id: order.id, status: 3 ).count
+           order.status = Order.statuses.key(3)
            order.save
         end
       end
