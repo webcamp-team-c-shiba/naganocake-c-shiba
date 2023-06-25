@@ -29,7 +29,7 @@
         <td>
           <!-- "入金待ち":0, "入金確認":1, "製作中":2, "発送準備中":3, "発送済":4 -->
           <%= f.select :status, {Order.statuses_i18n[Order.statuses.key(0)] => Order.statuses.key(0), Order.statuses_i18n[Order.statuses.key(1)] => Order.statuses.key(1), 
-          Order.statuses_i18n[Order.statuses.key(2)] => Order.statuses.key(2), Order.statuses_i18n[Order.statuses.key(3)] => Order.statuses.key(3), Order.statuses_i18n[Order.statuses.key(4)]=> Order.statuses.key(4)}, {},class: "form-control" %>
+          Order.statuses_i18n[Order.statuses.key(2)] => Order.statuses.key(2), Order.statuses_i18n[Order.statuses.key(3)] => Order.statuses.key(3), Order.statuses_i18n[Order.statuses.key(4)]=> Order.statuses.key(4)}, {},class: "form-control-sm" %>
           <%= f.submit "更新", class: 'btn btn-sm btn-success' %>
         </td>
       </tr>
@@ -41,12 +41,12 @@
       <!--左側-->
       <div class="col-md-8">
         <table class="table">
-          <thead class="thead-light">
-            <th>商品名</th>
-            <th>単価（税込）</th>
-            <th>数量</th>
-            <th>小計</th>
-            <th>製作ステータス</th>
+          <thead>
+            <th class="bg-light">商品名</th>
+            <th class="bg-light">単価（税込）</th>
+            <th class="bg-light">数量</th>
+            <th class="bg-light">小計</th>
+            <th class="bg-light">製作ステータス</th>
           </thead>
           
           <tbody>
@@ -61,7 +61,7 @@
                 <%= form_with model: selected_order_item, url: admin_order_item_path(selected_order_item), method: :patch, local: true do |f| %>
                 <!-- # enum status: { 着手不可:0, 製作待ち: 1, 製作中: 2, 製作完了: 3 }-->
                 <%= f.select :status, {OrderItem.statuses_i18n[OrderItem.statuses.key(0)] => OrderItem.statuses.key(0), OrderItem.statuses_i18n[OrderItem.statuses.key(1)]=> OrderItem.statuses.key(1),
-                OrderItem.statuses_i18n[OrderItem.statuses.key(2)]=> OrderItem.statuses.key(2), OrderItem.statuses_i18n[OrderItem.statuses.key(3)]=> OrderItem.statuses.key(3)}, class: 'form-control' %>
+                OrderItem.statuses_i18n[OrderItem.statuses.key(2)]=> OrderItem.statuses.key(2), OrderItem.statuses_i18n[OrderItem.statuses.key(3)]=> OrderItem.statuses.key(3)}, {}, class: 'form-control-sm' %>
                 <%= f.submit  "更新", class: 'btn btn-sm btn-success' %>
                 <% end %>
               </td>
