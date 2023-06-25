@@ -15,7 +15,9 @@
         </tr>
         <tr>
           <th>配送先</th>
-          <th>〒<%= @selected_order.postcode%><%= @selected_order.address%><%= @selected_order.name%></th>
+          <th>〒<%= @selected_order.postcode%> <%= @selected_order.address%><br>
+              <%= @selected_order.name%>
+          </th>
         </tr>
         <tr>
           <th>支払方法</th>
@@ -24,7 +26,9 @@
         <tr>
           <th>注文ステータス</th>
           <td>
-            <%= f.select :status, {"入金待ち" => Order.statuses.key(0), "入金確認" => Order.statuses.key(1), "製作中" => Order.statuses.key(2), "発送準備中" => Order.statuses.key(3), "発送済" => Order.statuses.key(4)}, class: "status" %>
+            <!-- "入金待ち":0, "入金確認":1, "製作中":2, "発送準備中":3, "発送済":4 -->
+            <%= f.select :status, {Order.statuses_i18n[Order.statuses.key(0)]=> Order.statuses.key(0), Order.statuses_i18n[Order.statuses.key(1)] => Order.statuses.key(1), 
+            Order.statuses_i18n[Order.statuses.key(2)] => Order.statuses.key(2), Order.statuses_i18n[Order.statuses.key(3)] => Order.statuses.key(3), Order.statuses_i18n[Order.statuses.key(4)]=> Order.statuses.key(4)}, class: "status" %>
             <%= f.submit "更新", class: 'btn btn-success' %>
             
           </td>
@@ -51,7 +55,9 @@
           
           <td>
             <%= form_with model: selected_order_item, url: admin_order_item_path(selected_order_item), method: :patch, local: true do |f| %>
-            <%= f.select :status, {"着手不可" => OrderItem.statuses.key(0), "製作待ち" => OrderItem.statuses.key(1),"製作中" => OrderItem.statuses.key(2), "製作完了" => OrderItem.statuses.key(3)}, class: "status" %>
+            <!-- # enum status: { 着手不可:0, 製作待ち: 1, 製作中: 2, 製作完了: 3 }-->
+            <%= f.select :status, {OrderItem.statuses_i18n[OrderItem.statuses.key(0)] => OrderItem.statuses.key(0), OrderItem.statuses_i18n[OrderItem.statuses.key(1)]=> OrderItem.statuses.key(1),
+            OrderItem.statuses_i18n[OrderItem.statuses.key(2)]=> OrderItem.statuses.key(2), OrderItem.statuses_i18n[OrderItem.statuses.key(3)]=> OrderItem.statuses.key(3)}, class: "status" %>
             <%= f.submit  "更新", class: 'btn btn-success' %>
             <% end %>
           </td>
