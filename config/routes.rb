@@ -24,7 +24,6 @@ Rails.application.routes.draw do
     end
   end
 
-  
   namespace :admin do
     get '/' => 'homes#top'
     resources :genres, only: [:index, :create, :edit, :update]
