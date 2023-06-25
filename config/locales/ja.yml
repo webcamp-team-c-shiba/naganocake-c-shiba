@@ -25,6 +25,7 @@ ja:
       attributes:
         item:
           genre_id: "ジャンル"
+          image: "商品画像"
           name: "商品名"
           description: "商品説明"
           price: "価格"
