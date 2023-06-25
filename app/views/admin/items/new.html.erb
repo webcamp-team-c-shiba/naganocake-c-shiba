@@ -1,8 +1,11 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto my-2">
-      <h2 class="mb-4">商品新規登録</h2>
-      <%= render 'form', item: @item %>
+<div class="container my-4 px-sm-1">
+  <div class="col-sm-12 col-md-10 col-lg-8 mx-auto my-2">
+    <div class="px-1">
+      <h5 class="bg-light text-center" style="width: 150px;">商品新規登録</h5>
+      <%= render 'layouts/errors', obj: @item %>
+    </div>
+    <div class="col-md-11 col-lg-10 col-xl-9 ml-3">
+    <%= render 'form', item: @item %>
     </div>
   </div>
 </div>

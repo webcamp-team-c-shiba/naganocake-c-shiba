@@ -11,9 +11,17 @@
   </head>
 
   <body>
-    <%= render "layouts/header" %>
-    <%= render 'layouts/flash_message' %>
+    <div class="header">
+      <%= render "layouts/header" %>
+    </div>
+    
+    <div class="main">
+      <%= render 'layouts/flash_message' %>
     <%= yield %>
-    <%= render "layouts/footer" %>
+    </div>
+    
+    <div class="footer">
+      <%= render "layouts/footer" %>
+    </div>
   </body>
 </html>
