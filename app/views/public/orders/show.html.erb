@@ -1,0 +1,76 @@
+<div class="container my-4 px-sm-0">
+  <div class="px-1 ml-md-2">
+    <h5 class="bg-light text-center ml-5 mb-4" style="width: 150px;">注文履歴詳細画面</h5> 
+  </div>
+  <div class="row row-cols-sm-1 row-cols-md-2">
+    <div class="col-md-6">
+      <table class="table table-bordered">
+        <b>注文情報</b><br>
+        <tbody class="thead-light">
+          <tr>
+            <th class="font-weight-normal">注文日</th>
+            <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+          </tr>
+          <tr>
+            <th class="font-weight-normal">配送先</th>
+            <td>
+                〒<%= @order.postcode%><br>
+                <%= @order.address%><br>
+                <%= @order.name%>
+            </td>
+          </tr>
+          <tr>
+            <th class="font-weight-normal">支払い方法</th>
+            <td><%= Order.payment_methods_i18n[@order.payment_method] %></td>
+          </tr>
+          <tr>
+            <th class="font-weight-normal">ステータス</th>
+            <td><%= Order.statuses_i18n[@order.status] %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="col-md-4">
+      <table class="table table-bordered">
+        <b>請求情報</b><br>
+        <tbody class="thead-light">
+            <tr>
+              <th class="font-weight-normal">商品合計</th>
+              <td><%= number_with_delimiter(@order.payment - @order.shipping_fee) %> 円</td>
+            </tr>
+            <tr>
+              <th class="font-weight-normal">配送料</th>
+              <td><%= number_with_delimiter(@order.shipping_fee) %> 円</td>
+            </tr>
+            <tr>
+              <th><b>ご請求額</b></th>
+              <td><%= number_with_delimiter(@order.payment) %> 円</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <table class="table table-bordered">
+    <b>注文内容</b>
+    <thead class="thead-light">
+      <th class="font-weight-normal">商品</th>
+      <th class="font-weight-normal">単価（税込）</th>
+      <th class="font-weight-normal">個数</th>
+      <th class="font-weight-normal">小計</th>
+      <th class="font-weight-normal">ステータス</th>
+    </thead>
+    <tbody>
+      <!--注文商品個別表示-->
+      <% OrderItem.where(order_id: @order.id).each do |order_item| %>
+          <tr>
+            <td><%= order_item.item.name %></td>
+            <td><%= number_with_delimiter(order_item.with_tax_price) %> 円</td>
+            <td><%= order_item.amount %></td>
+            <td><%= number_with_delimiter(order_item.subtotal) %> 円</td>
+            <td><%= OrderItem.statuses_i18n[order_item.status] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
