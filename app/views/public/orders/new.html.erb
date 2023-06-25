@@ -3,9 +3,9 @@
    
   <h5 class="bg-light text-center ml-5 mb-4" style="width: 130px;">注文情報入力</h5>	
  
-  
   <div class="col-sm-12 col-md-11 col-lg-10 col-xl-20 px-sm-0 px-md-1">
     <div class="form-wrapper">
+      
         <%= form_with model: @order, url: orders_check_path do |f| %>
             <h5 class="font-weight-bold">支払い方法</h5>
             <%= f.radio_button :payment_method, Order.payment_methods.key(0), checked: true %>
@@ -13,8 +13,10 @@
             <br>
             <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
             <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
-    
+            
+            <p class="mb-3">
             <h5 class="font-weight-bold">お届け先</h5>
+            </p>
             <div class="form-check">
                 <%= f.radio_button :address_option, 0, checked: true, class: "form-check-input" %>
                 <%= f.label :address_option, value: 0, class: "form-check-label" do %>
@@ -29,7 +31,7 @@
                 <%= f.label :address_option, value: 1, class: "form-check-label" do %>
                 
                     <h6>登録済住所から選択</h6>
-                    <%= f.select :address_id, options_from_collection_for_select(Address.where(customer_id: current_customer.id), :id, :address_display), { prompt: "お届け先を選択" }, class: "form-control" %>
+                    <%= f.select :address_id, options_from_collection_for_select(Address.where(customer_id: current_customer.id), :id, :address_display), { }, class: "form-control" %>
                 <% end%>
                 <br>
                 <br>
@@ -39,22 +41,34 @@
                     <table>
                       <tr>
                         <th>
-                          <div class="font-weight-light">郵便番号(ハイフンなし)</div>
+                           <div class="form-group row">
+                             <label for="postcode" class="col-7 col-form-label, font-weight-light">郵便番号(ハイフンなし)</label>
+                                <div class="col-6">
+                                 <%= f.text_field :postcode, class:"form-control", placeholder:"0000000" %>
+                                </div>
+                           </div>
                         </th>
-                        <th><%= f.text_field :postcode, class:"form-control col-5", placeholder:"0000000" %></th>
-                      </tr>
+                      </tr>  
                       <tr>
                         <th>
-                          <div class="font-weight-light">住所</div>
+                           <div class="form-group row">
+                             <label for="postcode" class="col-7 col-form-label, font-weight-light">住所</label>
+                                <div class="col-12">
+                                 <%= f.text_field :address, class: "form-control", placeholder:"東京都渋谷区代々木神園町0-0" %>
+                                </div>
+                           </div>
                         </th>
-                        <th><%= f.text_field :address, class: "form-control col-12", placeholder:"東京都渋谷区代々木神園町0-0" %></th>
-                      </tr>
+                      </tr>     
                       <tr>
-                        <th>
-                          <div class="font-weight-light">宛名</div>
-                        </th>
-                        <th><%= f.text_field :name, class:"form-control col-7", placeholder:"令和道子" %></th>
-                      </tr>
+                       <th>
+                           <div class="form-group row">
+                             <label for="postcode" class="col-7 col-form-label, font-weight-light">宛名</label>
+                            <div class="col-8">
+                                 <%= f.text_field :name, class:"form-control", placeholder:"令和道子" %>
+                            </div>
+                           </div>
+                       </th>
+                      </tr>        
                     </table>
                 <% end%>
                 <div class="text-center mt-3">

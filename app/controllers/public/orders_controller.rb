@@ -19,8 +19,6 @@ class Public::OrdersController < ApplicationController
       @order.name = current_customer.first_name + current_customer.last_name
       
     elsif params[:order][:address_option] == "1"
-        
-      @addresses = Address.all
       @selected_address = Address.find(params[:order][:address_id])
       @order.postcode = @selected_address.postcode
       @order.address = @selected_address.address
