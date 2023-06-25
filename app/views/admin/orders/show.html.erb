@@ -29,7 +29,7 @@
         <td>
           <!-- "入金待ち":0, "入金確認":1, "製作中":2, "発送準備中":3, "発送済":4 -->
           <%= f.select :status, {Order.statuses_i18n[Order.statuses.key(0)] => Order.statuses.key(0), Order.statuses_i18n[Order.statuses.key(1)] => Order.statuses.key(1), 
-          Order.statuses_i18n[Order.statuses.key(2)] => Order.statuses.key(2), Order.statuses_i18n[Order.statuses.key(3)] => Order.statuses.key(3), Order.statuses_i18n[Order.statuses.key(4)]=> Order.statuses.key(4)}, class: "form-control" %>
+          Order.statuses_i18n[Order.statuses.key(2)] => Order.statuses.key(2), Order.statuses_i18n[Order.statuses.key(3)] => Order.statuses.key(3), Order.statuses_i18n[Order.statuses.key(4)]=> Order.statuses.key(4)}, {},class: "form-control" %>
           <%= f.submit "更新", class: 'btn btn-sm btn-success' %>
         </td>
       </tr>
