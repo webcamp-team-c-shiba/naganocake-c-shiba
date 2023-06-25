@@ -1,6 +1,12 @@
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= bootstrap_alert(key) %> alert-dismissible fade show">
-    <span><%= value %></span>
+<% flash.each do |message| %>
+  <div class="alert alert-<%= bootstrap_alert(message[0]) %> alert-dismissible fade show">
+    <% if message[1].is_a?(Array) %>
+      <% message[1].each do |value| %>
+        <span><%= value %><br></span>
+      <% end %>
+    <% else %>
+      <span><%= message[1] %></span>
+    <% end %>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
