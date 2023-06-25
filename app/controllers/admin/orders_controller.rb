@@ -14,11 +14,10 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.update(order_params)
     @order_items = @order.order_items
-
-    if @order.status == "入金確認"
-      @order_items.each do |order_items|
-        order_items.status = "製作待ち"
-        order_items.save
+    if @order.status == Order.statuses.key(1)
+      @order_items.each do |order_item|
+        order_item.status = 1
+        order_item.save
       end
     end
     flash[:success] = "製作ステータスを変更しました。"

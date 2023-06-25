@@ -22,7 +22,7 @@
             <%= f.radio_button :address_option, 1, class: "form-check-input" %>
             <%= f.label :address_option, value: 1, class: "form-check-label" do %>
                 <h6>登録済住所から選択</h6>
-                <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
+                <%= f.select :address_id, options_from_collection_for_select(Address.where(customer_id: current_customer.id), :id, :address_display) %>
             <% end%>
             <br>
             <%= f.radio_button :address_option, 2, class: "form-check-input" %>

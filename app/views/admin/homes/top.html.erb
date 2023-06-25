@@ -16,7 +16,7 @@
             <% @orders.each do |order| %>
               <tr>
                 <td><u><%= link_to order.created_at.strftime("%Y/%m/%d %H:%M:%S"), admin_order_path(order), class: "text-reset " %></u></td>
-                <td><%= order.name %></td>
+                <td><%= order.customer.last_name + order.customer.first_name%></td>
                 <td>
                   <%= OrderItem.where(order_id: order.id).pluck(:amount).sum %>
                 </td>
