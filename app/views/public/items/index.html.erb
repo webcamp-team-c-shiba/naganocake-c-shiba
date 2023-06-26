@@ -16,12 +16,12 @@
         <% @items.each do |item| %>
           <div class="col-6 col-md-3 mb-3">
             <div>
+              <span class="d-inline-block text-truncate" style="max-width: 135px;">
               <%= link_to item_path(item.id), class: 'text-dark' do %>
                 <%= image_tag item.get_item_image(150, 100) %><br>
-                <span class="d-inline-block text-truncate" style="max-width: 135px;">
                 <%= item.name %>
-                </span>
               <% end %>
+              </span>
             </div>
             
             <div>¥<%= number_with_delimiter(item.price) %></div>
