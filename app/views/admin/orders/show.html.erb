@@ -53,9 +53,9 @@
             <% @selected_order.order_items.each do |selected_order_item| %>
             <tr>
               <td><%= selected_order_item.item.name %></td>
-              <td><%= number_with_delimiter((selected_order_item.with_tax_price).to_i) %></td>
+              <td><%= number_with_delimiter((selected_order_item.with_tax_price).to_i) %> 円</td>
               <td><%= selected_order_item.amount %></td>
-              <td><%= number_with_delimiter(selected_order_item.subtotal) %></td>
+              <td><%= number_with_delimiter(selected_order_item.subtotal) %> 円</td>
               
               <td>
                 <%= form_with model: selected_order_item, url: admin_order_item_path(selected_order_item), method: :patch, local: true do |f| %>
@@ -74,17 +74,17 @@
       <div class="col-md-4 align-self-end">
         <table class="table table-borderless">
           <tr>
-              <th>商品合計</th>
+              <th style="width: 40%">商品合計</th>
               <td><%= (@selected_order.payment - @selected_order.shipping_fee).to_s(:delimited)%> 円</td>
           </tr>
           <tr>
             <p>
-              <th class="col-xs-2">送料</th>
+              <th class="col-xs-2" style="width: 40%">送料</th>
               <td><%= @selected_order.shipping_fee.to_s(:delimited)%> 円</td>
             </p>
           </tr>
           <tr>
-              <th class="col-xs-4">請求金額合計</th>
+              <th class="col-xs-4" style="width: 40%">請求金額合計</th>
               <td><b><%= @selected_order.payment.to_s(:delimited) %> 円</b></td>
           </tr>
         </table>
