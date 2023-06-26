@@ -20,9 +20,11 @@
       <div class="row mx-auto">
         <% @items.first(4).each do |item| %>
           <div class="col-6 col-md-3 mb-1 mb-md">
-            <%= image_tag item.get_item_image(150, 100) %></br>
             <span class="d-inline-block text-truncate" style="max-width: 190px;">
-              <%= link_to item.name,item_path(item.id),class: 'text-dark' %>
+              <%= link_to item_path(item.id),class: 'text-dark' do %>
+                <%= image_tag item.get_item_image(150, 100) %></br>
+                <%= item.name %>
+              <% end %>
             </span></br>
             ¥<%= number_with_delimiter(item.price) %>
           </div>
