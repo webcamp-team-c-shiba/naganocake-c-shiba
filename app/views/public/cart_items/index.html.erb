@@ -1,7 +1,7 @@
-<div class="container my-4">
+<div class="container my-4 px-sm-1">
   <div class="d-flex align-items-center my-3">
-    <div class="col col-7 col-sm-6 col-md-5 col-lg-4 col-xl-3 px-2">
-      <h5 class="bg-light text-center ml-5 my-0">ショッピングカート</h5>
+    <div class="px-1">
+      <h5 class="bg-light text-center ml-2" style="width: 210px;">ショッピングカート</h5>
     </div>
     <div class="ml-auto mr-2">
       <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, data: { confirm: "カート内商品を全て削除しますか？" }, class: 'btn-sm px-3 btn btn-danger' %>

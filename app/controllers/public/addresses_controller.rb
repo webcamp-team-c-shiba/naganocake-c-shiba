@@ -19,6 +19,7 @@ class Public::AddressesController < ApplicationController
       redirect_to addresses_path
     else
       @addresses = Address.where(customer_id: current_customer.id)
+      flash.now[:danger] = '未記入項目があります'
       render :index
     end
   end
@@ -29,6 +30,7 @@ class Public::AddressesController < ApplicationController
       flash[:success] = "配送先情報が更新されました。"
       redirect_to addresses_path
     else
+      flash.now[:danger] = '未記入項目があります'
       render :edit
     end
   end
