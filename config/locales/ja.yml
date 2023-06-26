@@ -6,7 +6,7 @@ ja:
                 transfer: "銀行振込"
             status:
                 waiting_payment: "入金待ち"
-                confirmation_payment: "入金確認中"
+                confirmation_payment: "入金確認"
                 under_process: "製作中"
                 waiting_shipping: "発送準備中"
                 completed_shipping: "発送済み"
