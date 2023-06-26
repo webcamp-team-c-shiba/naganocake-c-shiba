@@ -3,7 +3,7 @@
     <h5 class="bg-light text-center ml-6">新規会員登録</h5>
   </div>
     <%= form_with model: @customer, url: customer_registration_path do |f| %>
-      <%= render "public/shared/error_messages", resource: resource %>
+      <%= render 'layouts/errors', obj: resource %>
       
       <div class="container my-5 px-sm-0">
         <div class="row">
