@@ -2,74 +2,82 @@
  <div class="px-1 ml-md-2">
   <h5 class="bg-light text-center ml-5 mb-4" style="width: 130px;">注文情報確認</h5>	
    <div class="col-sm-12 col-md-11 col-lg-10 col-xl-20 px-sm-0 px-md-1">
-
-    <!--商品情報テーブル-->
-    <table class="table table-bordered">
-        <thead>
-            <th>商品名</th>
-            <th>単価（税込）</th>
-            <th>数量</th>
-            <th>小計</th>
-        </thead>
-        <tbody>
-            <!--商品合計用の変数設定-->
-            <% total = 0 %>
-            <!--1商品ずつの表示、計算-->
-            <% @cart_items.each do |cart_item| %>
-                <tr>
-                    <td>
-                        <%= image_tag cart_item.item.get_item_image(150, 100) %>
-                        <%= cart_item.item.name %>
-                    </td>
-                    <td>
-                        <%= number_with_delimiter(cart_item.item.with_tax_price) %> 円
-                    </td>
-                    <td>
-                        <%= cart_item.amount %>
-                    </td>
-                    <td>
-                        <%= number_with_delimiter(cart_item.subtotal) %> 円
-                        <!--商品合計用の計算-->
-                        <% total = total + cart_item.subtotal %>
-                    </td>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
-    
-    <!--金額テーブル-->
-    <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <th>送料</th>
-                <td><%= number_with_delimiter(@shipping_fee) %> 円</td>
-            </tr>
-            <tr>
-                <th>商品合計</th>
-                <td><%= number_with_delimiter(total) %> 円</td>
-            </tr>
-            <tr>
-                <th>請求金額</th>
-                <td>
-                    <% payment = @shipping_fee + total %>
-                    <%= number_with_delimiter(payment) %> 円
-                </td>
-            </tr>
-        </tbody>
-    </table>
     
     <div class="row">
-        <h5 class="col">
+      <div class="col-lg-9">
+        <!--商品情報テーブル-->
+        <table class="table table-bordered">
+            <thead>
+                <th class="bg-light">商品名</th>
+                <th class="bg-light">単価（税込）</th>
+                <th class="bg-light">数量</th>
+                <th class="bg-light">小計</th>
+            </thead>
+            <tbody>
+                <!--商品合計用の変数設定-->
+                <% total = 0 %>
+                <!--1商品ずつの表示、計算-->
+                <% @cart_items.each do |cart_item| %>
+                    <tr>
+                        <td>
+                            <%= image_tag cart_item.item.get_item_image(80, 65) %>
+                            <%= cart_item.item.name %>
+                        </td>
+                        <td>
+                            <%= number_with_delimiter(cart_item.item.with_tax_price) %> 円
+                        </td>
+                        <td>
+                            <%= cart_item.amount %>
+                        </td>
+                        <td>
+                            <%= number_with_delimiter(cart_item.subtotal) %> 円
+                            <!--商品合計用の計算-->
+                            <% total = total + cart_item.subtotal %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+      </div>
+      <div class="col-lg-3">
+        <!--金額テーブル-->
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th class="bg-light">送料</th>
+                    <td><%= number_with_delimiter(@shipping_fee) %> 円</td>
+                </tr>
+                <tr>
+                    <th class="bg-light">商品合計</th>
+                    <td><%= number_with_delimiter(total) %> 円</td>
+                </tr>
+                <tr>
+                    <th class="bg-light">請求金額</th>
+                    <td>
+                        <% payment = @shipping_fee + total %>
+                        <%= number_with_delimiter(payment) %> 円
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+    
+    
+    
+    
+    <div class="row">
+        <h5 class="col-3">
           <div class="font-weight-bold">支払い方法</div>
         </h5>
-        <p class="col"><%= Order.payment_methods_i18n[@order.payment_method] %></p>
+        <p class="col-9"><%= Order.payment_methods_i18n[@order.payment_method] %></p>
     </div>
     
     <div class="row">
-        <h5 class="col">
+        <h5 class="col-3">
           <div class="font-weight-bold">お届け先</div>
         </h5>
-        <p class="col">
+        <p class="col-9">
         〒<%= @order.postcode %>
         <%= @order.address %>
         <%= @order.name %>
