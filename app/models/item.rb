@@ -6,9 +6,8 @@ class Item < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :orders, through: :order_item
 
-  validates :genre_id, presence: true
+  
   validates :image, presence: true
-  validates_format_of :image, with: /\A.*\.(png|jpg|jpeg|gif)\z/i, message: "(PNG, JPG, JPEG, GIF)ファイルを選択してください"
   validates :name, presence: true
   validates :description, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }

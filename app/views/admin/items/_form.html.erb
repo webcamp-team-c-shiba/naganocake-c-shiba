@@ -5,7 +5,7 @@
       <label class="col-md-4 col-form-label">商品画像</label>
       <div class="col form-row">
         <div class="col d-flex align-items-center">
-          <%= f.file_field :image, class: 'form-control-file', accept: 'image/*' %>
+          <%= f.file_field :image, class: 'form-control-file' %>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
       <label class="col-md-4 col-form-label">ジャンル</label>
       <div class="col form-row">
         <div class="col">
-          <%= f.select :genre_id, options_for_select(Genre.all.map { |genre| [genre.name, genre.id] }), {}, class: 'form-control' %>
+          <%= f.select :genre_id, options_for_select(Genre.all.map { |genre| [genre.name, genre.id] }), {prompt: '選択してください'}, class: 'form-control' %>
         </div>
       </div>
     </div>
