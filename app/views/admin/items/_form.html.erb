@@ -1,60 +1,73 @@
-      <div class="form-wrapper">
-        <%= form_with model: item, url: (item.persisted? ? admin_item_path(item) : admin_items_path), class: 'form', local: true do |f| %>
-        <%= render 'layouts/errors', obj: @item %>
-    
-          <div class="form-group row">
-            <%= f.label :image, '商品画像', class: 'col-sm-4 col-form-label' %>
-            <div class="col-sm-8">
-              <div class="input-group">
-                <%= f.file_field :image, class: 'form-control' %>
-              </div>
-            </div>
-          </div>
-    
-          <div class="form-group row">
-            <%= f.label :name, '商品名', class: 'col-sm-4 col-form-label' %>
-            <div class="col-sm-8">
-              <%= f.text_field :name, class: 'form-control' %>
-            </div>
-          </div>
-    
-          <div class="form-group row">
-            <%= f.label :description, '商品説明', class: 'col-sm-4 col-form-label' %>
-            <div class="col-sm-8">
-              <%= f.text_area :description, class: 'form-control', rows: 6 %>
-            </div>
-          </div>
-              
-          <div class="form-group row">
-            <%= f.label :genre_id, 'ジャンル', class: 'col-sm-4 col-form-label' %>
-            <div class="col-sm-8">
-              <%= f.select :genre_id, options_for_select(Genre.all.map { |genre| [genre.name, genre.id] }), {}, class: 'form-control' %>
-            </div>
-          </div>
-    
-          <div class="form-group row">
-            <%= f.label :price, '税抜価格', class: 'col-sm-4 col-form-label' %>
-            <div class="col-sm-8">
-              <%= f.number_field :price, class: 'form-control' %>
-            </div>
-          </div>
-    
-          <div class="form-group row">
-            <%= f.label :is_stopped, '販売ステータス', class: 'col-sm-4 col-form-label' %>
-            <div class="col-sm-8">
-              <div class="form-check form-check-inline">
-                <%= f.radio_button :is_stopped, false, id: 'selling_status_1', class: 'form-check-input' %>
-                <%= f.label 'selling_status_1', '販売中', class: 'form-check-label' %>
-              </div>
-              <div class="form-check form-check-inline">
-                <%= f.radio_button :is_stopped, true, id: 'selling_status_2', class: 'form-check-input' %>
-                <%= f.label 'selling_status_2', '販売停止中', class: 'form-check-label' %>
-              </div>
-            </div>
-          </div>
-          
-          <div class="actions d-flex justify-content-center">
-            <%= f.submit (action_name == 'new' ? '新規登録' : '変更を保存'), class: 'btn btn-success px-4' %>
-          </div>
-        <% end %>
+<div>
+  <%= form_with model: item, url: (item.persisted? ? admin_item_path(item) : admin_items_path), class: 'form', local: true do |f| %>
+  
+    <div class="form-group row ml-md-2 mb-2">
+      <label class="col-md-4 col-form-label">商品画像</label>
+      <div class="col form-row">
+        <div class="col d-flex align-items-center">
+          <%= f.file_field :image, class: 'form-control-file' %>
+        </div>
       </div>
+    </div>
+    
+    <div class="form-group row ml-md-2 mb-2">
+      <label class="col-md-4 col-form-label">商品名</label>
+      <div class="col form-row">
+        <div class="col">
+          <%= f.text_field :name, class: 'form-control', placeholder: '商品名' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row ml-md-2 mb-2">
+      <label class="col-md-4 col-form-label">商品説明</label>
+      <div class="col form-row">
+        <div class="col">
+          <%= f.text_area :description, class: 'form-control', rows: 6, placeholder: 'ここに説明文を記述します'  %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row ml-md-2 mb-2">
+      <label class="col-md-4 col-form-label">ジャンル</label>
+      <div class="col form-row">
+        <div class="col">
+          <%= f.select :genre_id, options_for_select(Genre.all.map { |genre| [genre.name, genre.id] }), {}, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row ml-md-2 mb-2">
+      <label class="col-md-4 col-form-label">税抜価格</label>
+      <div class="col form-row">
+        <div class="col d-flex align-items-center">
+          <%= f.number_field :price, class: 'form-control', placeholder: '1000'  %> <label class="ml-1 mt-1">円</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row ml-md-2 mb-2">
+      <label class="col-md-4 col-form-label">販売ステータス</label>
+      <div class="col form-row d-flex align-items-center ml-3">
+        <div class="col-6">
+          <%= f.radio_button :is_stopped, false, id: 'selling_status_1', class: 'form-check-input' %>
+          <%= f.label 'selling_status_1', '販売中', class: 'form-check-label' %>
+        </div>
+        <div class="col-6">
+          <%= f.radio_button :is_stopped, true, id: 'selling_status_2', class: 'form-check-input' %>
+          <%= f.label 'selling_status_2', '販売停止中', class: 'form-check-label' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row ml-md-2">
+      <label class="col-md-4 col-form-label"></label>
+      <div class="col form-row text-center">
+        <div class="col">
+          <%= f.submit (action_name == 'new' ? '新規登録' : '変更を保存'), class: 'btn btn-success px-4' %>
+        </div>
+      </div>
+    </div>
+    
+  <% end %>
+</div>

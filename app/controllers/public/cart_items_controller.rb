@@ -30,8 +30,9 @@ class Public::CartItemsController < ApplicationController
   def create
     if @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
       @cart_item.customer_id = current_customer.id
+      @cart_item.amount += params[:cart_item][:amount].to_i
       @cart_item.save
-      flash[:warning] = "すでにカートに追加しています。"
+      flash[:warning] = "商品の数量を変更しました。"
     else
       @cart_item = CartItem.new(cart_item_params)
       @cart_item.customer_id = current_customer.id

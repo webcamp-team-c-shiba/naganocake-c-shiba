@@ -1,35 +1,30 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-10 mx-auto">
-      <div class="d-flex justify-content-between align-items-center my-2">
-        <h2 class="ml-3">商品一覧</h2>
-        <div>
-          <%= link_to new_admin_item_path, class: "btn mr-2" do %>
-            <i class="fa-regular fa-square-plus fa-2x"></i>
-          <% end %>
-          
-        </div>
-      </div>
+<div class="container my-4 px-sm-1">
+  <div class="d-flex justify-content-between align-items-center my-2">
+    <div class="px-1 ml-md-2">
+      <h5 class="bg-light text-center" style="width: 110px;">商品一覧</h5>
+    </div>
+    <div>
+      <%= link_to new_admin_item_path, class: "btn mr-2" do %>
+        <i class="fa-regular fa-square-plus fa-2x"></i>
+      <% end %>
+    </div>
+  </div>
 
-      <table class="table table-striped">
+      <table class="table table-hover">
         <thead>
           <tr>
-            <th>商品ID</th>
-            <th>商品名</th>
-            <th>税抜価格</th>
-            <th>ジャンル</th>
-            <th>ステータス</th>
+            <th class="bg-light">商品ID</th>
+            <th class="bg-light">商品名</th>
+            <th class="bg-light">税抜価格</th>
+            <th class="bg-light">ジャンル</th>
+            <th class="bg-light">ステータス</th>
           </tr>
         </thead>
         <tbody>
           <% @items.each do |item| %>
             <tr>
               <td><%= item.id %></td>
-              <td>
-                <%= link_to admin_item_path(item) do %>
-                  <span style="color: black;"><%= item.name %></span>
-                <% end %>
-              </td>
+              <td class="link-black"><%= link_to item.name,admin_item_path(item) %></td>
               <td><%= number_with_delimiter(item.price) %> 円</td>
               <td><%= item.genre.name %></td>
               <td>
@@ -48,5 +43,4 @@
         <%= paginate @items, theme: 'bootstrap-5' %>
       </div>
     </div>
-  </div>
 </div>
