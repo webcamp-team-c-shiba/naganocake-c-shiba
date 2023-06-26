@@ -23,7 +23,7 @@
       <label class="col-md-4 col-form-label">商品説明</label>
       <div class="col form-row">
         <div class="col">
-          <%= f.text_area :description, class: 'form-control', rows: 6, placeholder: 'ここに説明文を記述します'  %>
+          <%= f.text_area :description, class: 'form-control', rows: 6, placeholder: 'ここに説明文を記述します', input_html: { wrap: :virtual } %>
         </div>
       </div>
     </div>
