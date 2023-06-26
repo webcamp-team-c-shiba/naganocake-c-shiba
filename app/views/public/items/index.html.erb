@@ -18,9 +18,12 @@
             <div>
               <%= link_to item_path(item.id), class: 'text-dark' do %>
                 <%= image_tag item.get_item_image(150, 100) %><br>
+                <span class="d-inline-block text-truncate" style="max-width: 135px;">
                 <%= item.name %>
+                </span>
               <% end %>
             </div>
+            
             <div>¥<%= number_with_delimiter(item.price) %></div>
           </div>
         <% end %>
