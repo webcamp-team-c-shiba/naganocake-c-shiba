@@ -34,9 +34,9 @@
               <th style="white-space: nowrap;">ステータス</th>
               <td>
                 <% if @item.is_stopped %>
-                  <span class="text-secondary">販売停止中</span>
+                  <strong><span class="text-secondary">販売停止中</span></strong>
                 <% else %>
-                  <span class="text-success">販売中</span>
+                  <strong><span class="text-success">販売中</span></strong>
                 <% end %>
               </td>
             </tr>

@@ -34,28 +34,27 @@
                 <% end%>
                 <%= f.select :address_id, options_from_collection_for_select(Address.where(customer_id: current_customer.id), :id, :address_display), { }, class: "form-control" %>
                 <br>
-                <br>
                 <%= f.radio_button :address_option, 2, class: "form-check-input" %>
                 <%= f.label :address_option, value: 2, class: "form-check-label" do %>
                 <h6>新しいお届け先</h6>
                  <% end%>
                 
 
-                           <div class="form-group row">
+                           <div class="form-group row mb-2">
                              <label for="postcode" class="col-md-4 col-form-label, font-weight-light">郵便番号(ハイフンなし)</label>
                                 <div class="col-md-4">
                                  <%= f.text_field :postcode, class:"form-control", placeholder:"0000000" %>
                                 </div>
                            </div>
 
-                           <div class="form-group row">
+                           <div class="form-group row mb-2">
                              <label for="postcode" class="col-md-4 col-form-label, font-weight-light">住所</label>
                                 <div class="col-md-8">
                                  <%= f.text_field :address, class: "form-control", placeholder:"東京都渋谷区代々木神園町0-0" %>
                                 </div>
                            </div>
 
-                           <div class="form-group row">
+                           <div class="form-group row mb-2">
                              <label for="postcode" class="col-md-4 col-form-label, font-weight-light">宛名</label>
                             <div class="col-md-4">
                                  <%= f.text_field :name, class:"form-control", placeholder:"令和道子" %>

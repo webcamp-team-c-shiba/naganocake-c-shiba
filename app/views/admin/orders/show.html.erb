@@ -1,6 +1,6 @@
 <div class="container  my-4 px-sm-0">
   <div class="px-1 ml-md-2">
-    <h5 class="bg-light text-center ml-5 mb-4" style="width: 150px;">注文履歴詳細</h5> 
+    <h5 class="bg-light text-center ml-5 mb-2" style="width: 150px;">注文履歴詳細</h5> 
   </div>
   <!--上段-->
   <div class="row"> 
@@ -30,7 +30,7 @@
           <!-- "入金待ち":0, "入金確認":1, "製作中":2, "発送準備中":3, "発送済":4 -->
           <%= f.select :status, {Order.statuses_i18n[Order.statuses.key(0)] => Order.statuses.key(0), Order.statuses_i18n[Order.statuses.key(1)] => Order.statuses.key(1), 
           Order.statuses_i18n[Order.statuses.key(2)] => Order.statuses.key(2), Order.statuses_i18n[Order.statuses.key(3)] => Order.statuses.key(3), Order.statuses_i18n[Order.statuses.key(4)]=> Order.statuses.key(4)}, {},class: "form-control-sm" %>
-          <%= f.submit "更新", class: 'btn btn-sm btn-success' %>
+          <%= f.submit "更新", class: 'btn btn-sm btn-success mb-1' %>
         </td>
       </tr>
     </table>
@@ -62,7 +62,7 @@
                 <!-- # enum status: { 着手不可:0, 製作待ち: 1, 製作中: 2, 製作完了: 3 }-->
                 <%= f.select :status, {OrderItem.statuses_i18n[OrderItem.statuses.key(0)] => OrderItem.statuses.key(0), OrderItem.statuses_i18n[OrderItem.statuses.key(1)]=> OrderItem.statuses.key(1),
                 OrderItem.statuses_i18n[OrderItem.statuses.key(2)]=> OrderItem.statuses.key(2), OrderItem.statuses_i18n[OrderItem.statuses.key(3)]=> OrderItem.statuses.key(3)}, {}, class: 'form-control-sm' %>
-                <%= f.submit  "更新", class: 'btn btn-sm btn-success' %>
+                <%= f.submit  "更新", class: 'btn btn-sm btn-success mb-1' %>
                 <% end %>
               </td>
              </tr>
