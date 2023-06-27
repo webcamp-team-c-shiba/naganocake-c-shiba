@@ -1,0 +1,43 @@
+<div class="container my-4 px-sm-0">
+  <div class="px-1 ml-md-2">
+    <h5 class="bg-light text-center ml-5 mb-4" style="width: 130px;">注文履歴一覧</h5> 
+  </div>
+  <!--履歴テーブル-->
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th>注文日</th>
+            <th>配送先</th>
+            <th>注文商品</th>
+            <th>支払金額</th>
+            <th>ステータス</th>
+            <th>注文詳細</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.created_at.strftime("%Y/%m/%d") %></td>    
+            <td>
+              〒<%= order.postcode%><br>
+              <%= order.address%><br>
+              <%= order.name%>
+            </td>
+            <td>
+              <% OrderItem.where(order_id: order.id).each do |order_item|  %>
+                  <%= order_item.item.name %><br>
+              <% end %>
+            </td>
+            <td><%= number_with_delimiter(order.payment) %>円</td>
+            <td><%= Order.statuses_i18n[order.status] %></td>
+            <td class="text-center"><%= link_to "表示する", order_path(order), class: "btn btn-sm btn-primary" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <%= paginate @orders, theme: 'bootstrap-5' %>
+</div>

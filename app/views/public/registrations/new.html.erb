@@ -1,0 +1,104 @@
+<div class="container my-4 px-sm-0">
+  <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 ml-md-5">
+    <h5 class="bg-light text-center ml-6">新規会員登録</h5>
+  </div>
+    <%= form_with model: @customer, url: customer_registration_path do |f| %>
+      <%= render "public/shared/error_messages", resource: resource %>
+      
+      <div class="container my-5 px-sm-0">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group row">
+              <label for="last_name" class="col-sm-2 col-form-label">名前</label>
+              <div class="col-sm-1 px-3">
+                <%= f.label :last_name, "（姓）" , class: "form-lavel mt-1"%>
+              </div>
+              <div class="col-sm-3">
+                <%= f.text_field :last_name, autocomplete: "surname", placeholder: "令和" , class: "form-control"%>
+              </div>
+              <div class="col-sm-1 px-3">
+                <%= f.label :first_name, "（名）" , class: "form-lavel mt-1"%>
+              </div>
+              <div class="col-sm-3">
+                <%= f.text_field :first_name, autocomplete: "given_name", placeholder: "道子" , class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="kana_last_name" class="col-sm-2 col-form-label">ふりがな</label>
+              <div class="col-sm-1 px-3">
+                <%= f.label :kana_last_name, "（セイ）" , class: "form-lavel mt-2"%>
+              </div>
+              <div class="col-sm-3">
+                <%= f.text_field :kana_last_name, autocomplete: "on", placeholder: "レイワ" , class: "form-control"%>
+              </div>
+              <div class="col-sm-1 px-3">
+                <%= f.label :kana_first_name, "（メイ）" , class: "form-lavel mt-2"%>
+              </div>
+              <div class="col-sm-3">
+                <%= f.text_field :kana_first_name, autocomplete: "on", placeholder: "ミチコ" , class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email" class="col-sm-3 col-form-label">メールアドレス</label>
+              <div class="col-sm-3">
+                <%= f.email_field :email, autocomplete: "email", placeholder: "sample@example.com" , class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="postcode" class="col-sm-3 col-form-label">郵便番号(ハイフンなし)</label>
+              <div class="col-sm-3">
+                <%= f.text_field :postcode, autocomplete: "postal_code", placeholder: "0000000" , class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="address" class="col-sm-3 col-form-label">住所</label>
+              <div class="col-sm-7">
+                <%= f.text_field :address, autocomplete: "street-address", placeholder: "東京都渋谷区代々木神園町0-0" , class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="phone_number" class="col-sm-3 col-form-label">電話番号(ハイフンなし)</label>
+              <div class="col-sm-3">
+                <%= f.text_field :phone_number, autocomplete: "phone_national", placeholder: "00000000000" , class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="password" class="col-sm-3 col-form-label">パスワード
+                <% if @minimum_password_length %>
+                  (<%= @minimum_password_length %>文字以上)
+                <% end %>
+              </label>
+              <div class="col-sm-3">
+                <%= f.password_field :password, autocomplete: "new-password" , class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="password_confirmation" class="col-sm-3 col-form-label">パスワード(確認用)</label>
+              <div class="col-sm-3">
+                <%= f.password_field :password_confirmation, autocomplete: "new-password" , class: "form-control"%>
+              </div>
+            </div> 
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label"></label>              
+              <div class="col-sm-5">
+                <%= f.submit "新規登録", class: "btn btn-success col-sm-6 font-weight-bold" %>    
+              </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  <div class="container my-3 px-sm-0">
+    <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 ml-md-5">
+      <h5 class="bg-light text-center ml-6">既に登録済みの方</h5>
+    </div>
+  </div>
+      
+  <div class="container my-4 pr-sm-0 ">
+    <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 ml-md-5 ">
+      <p class="text-nowrap"><%= link_to "こちら", new_session_path(resource_name) %>  からログインしてください。</p>
+    </div>
+  </div>
+  
+</div>

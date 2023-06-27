@@ -1,3 +1,10 @@
+# NaganoCake ECサイト
+## 作成者
+* じゅんじゅん
+* ともやん
+* バンちゃん
+* かくちゃん
+
 # README
 
 This README would normally document whatever steps are necessary to get the

@@ -1,0 +1,27 @@
+@use '~bootstrap/scss/bootstrap';
+
+// Fontawesome
+@use '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.pagination {
+  justify-content: center;
+}
+
+.cart-item-mount {
+  display: inline-block;
+}
+
+.container table td {
+  vertical-align: middle;
+}
+
+.link-black a {
+  color: black;
+  text-decoration: underline;
+}
+
+.link-black a:hover {
+  color: black;
+  text-decoration: none;
+}
+
