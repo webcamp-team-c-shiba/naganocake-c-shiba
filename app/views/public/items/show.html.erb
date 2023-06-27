@@ -10,7 +10,7 @@
     
     <div class="col-sm-8 col-lg-6 mx-auto mt-4 mt-lg-2">
       <h4 class="font-weight-bold mb-2"><%= @item.name %></h4>
-      <%= @item.description %></br>
+      <%= simple_format(@item.description) %></br>
       <div class="d-flex">
         <h4 class="font-weight-bold mt-3">
           ¥ <%= number_with_delimiter(@item.with_tax_price) %>
