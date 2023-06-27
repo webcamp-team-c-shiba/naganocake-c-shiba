@@ -1,4 +1,4 @@
-<div class="container my-4 px-sm-0">
+<div class="container my-4 px-sm-1">
   <div class="row">
     <div class="col-sm-4 col-md-3 col-lg-2">
       <%= render 'public/items/genre_search', genres: @genres %>
@@ -16,11 +16,14 @@
         <% @items.each do |item| %>
           <div class="col-6 col-md-3 mb-3">
             <div>
+              <span class="d-inline-block text-truncate" style="max-width: 135px;">
               <%= link_to item_path(item.id), class: 'text-dark' do %>
                 <%= image_tag item.get_item_image(150, 100) %><br>
                 <%= item.name %>
               <% end %>
+              </span>
             </div>
+            
             <div>¥<%= number_with_delimiter(item.price) %></div>
           </div>
         <% end %>

@@ -1,6 +1,8 @@
 class Admin::OrdersController < ApplicationController
+  before_action :authenticate_admin!
+  
   def customer_index
-    @orders = Order.where(customer_id: params[:customer_id]).order(created_at: :desc).page params[:page]
+    @orders = Order.where(customer_id: params[:customer_id]).order(created_at: :desc).page(params[:page]).per(10)
     @customer = Customer.find(params[:customer_id])
   end
 
@@ -11,6 +13,7 @@ class Admin::OrdersController < ApplicationController
   end
 
   def update
+    # enum status: { 着手不可:0, 製作待ち: 1, 製作中: 2, 製作完了: 3 }
     @order = Order.find(params[:id])
     @order.update(order_params)
     @order_items = @order.order_items
@@ -18,9 +21,17 @@ class Admin::OrdersController < ApplicationController
       @order_items.each do |order_item|
         order_item.status = 1
         order_item.save
+        # 複数メッセージ表示のための配列準備
+        flash[:success] = []
+        flash[:success] << "製作ステータスを変更しました。"
       end
     end
-    flash[:success] = "製作ステータスを変更しました。"
+    # 複数メッセージ表示のための場合分け
+    if flash[:success].nil?
+      flash[:success] = "注文ステータスを変更しました。"
+    else
+      flash[:success] << "注文ステータスを変更しました。"
+    end
     redirect_to admin_order_path
   end
 

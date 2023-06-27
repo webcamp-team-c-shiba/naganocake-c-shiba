@@ -6,7 +6,8 @@ class Item < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :orders, through: :order_item
 
-  validates :genre_id, presence: true
+  
+  validates :image, presence: true
   validates :name, presence: true
   validates :description, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
@@ -22,6 +23,11 @@ class Item < ApplicationRecord
   # 消費税
   def with_tax_price
     (price * 1.1).floor
+  end
+  
+  # 小計
+  def subtotal
+    with_tax_price * amount
   end
   
   # ヘッダーの検索機能

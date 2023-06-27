@@ -11,8 +11,9 @@ class Admin::GenresController < ApplicationController
     if @genre.save
       flash[:info] = "ジャンルが作成されました。"
       redirect_to admin_genres_path
-    els
+    else
       @genres = Genre.all
+      flash[:danger] = "未記入項目があります"
       render :index
     end
   end
@@ -27,7 +28,7 @@ class Admin::GenresController < ApplicationController
       flash[:success] = "ジャンルが更新されました。"
       redirect_to admin_genres_path
     else
-      @genre = Genre.find(params[:id])
+      flash[:danger] = "未記入項目があります"
       render :edit
     end
   end

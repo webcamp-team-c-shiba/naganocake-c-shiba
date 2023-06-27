@@ -1,99 +1,93 @@
-<div class="container">
-  <div class="row">
-    <div class="mx-auto">
-
-      <h3>注文履歴詳細</h3>
-      <%= form_with model: @selected_order, url: admin_order_path, local: true do |f| %>
-      <table>
-        <tr>
-          <th>購入者</th>
-          <th><u><%= link_to @customer.last_name + @customer.first_name, admin_customer_path(@customer), class: "text-reset" %></u></th>
-        </tr>
-        <tr>
-          <th>注文日</th>
-          <th><%= @selected_order.created_at.strftime("%Y/%m/%d") %></th>
-        </tr>
-        <tr>
-          <th>配送先</th>
-          <th>〒<%= @selected_order.postcode%> <%= @selected_order.address%><br>
-              <%= @selected_order.name%>
-          </th>
-        </tr>
-        <tr>
-          <th>支払方法</th>
-          <th><%= Order.payment_methods_i18n[@selected_order.payment_method] %></th>
-        </tr>
-        <tr>
-          <th>注文ステータス</th>
-          <td>
-            <!-- "入金待ち":0, "入金確認":1, "製作中":2, "発送準備中":3, "発送済":4 -->
-            <%= f.select :status, {Order.statuses_i18n[Order.statuses.key(0)]=> Order.statuses.key(0), Order.statuses_i18n[Order.statuses.key(1)] => Order.statuses.key(1), 
-            Order.statuses_i18n[Order.statuses.key(2)] => Order.statuses.key(2), Order.statuses_i18n[Order.statuses.key(3)] => Order.statuses.key(3), Order.statuses_i18n[Order.statuses.key(4)]=> Order.statuses.key(4)}, class: "status" %>
-            <%= f.submit "更新", class: 'btn btn-success' %>
-            
-          </td>
-        </tr>
-      </table>
-      <% end %>
-
-      <table class="table">
-        <header>
-          <th>商品名</th>
-          <th>単価（税込）</th>
-          <th>数量</th>
-          <th>小計</th>
-          <th>製作ステータス</th>
-        </header>
-        
-        
-        <% @selected_order.order_items.each do |selected_order_item| %>
-        <tr>
-          <td><%= selected_order_item.item.name %></td>
-          <td><%= number_with_delimiter((selected_order_item.item.with_tax_price).to_i) %></td>
-          <td><%= selected_order_item.amount %></td>
-          <td><%= number_with_delimiter(selected_order_item.item.price) %></td>
+<div class="container  my-4 px-sm-1">
+  <div class="px-1 ml-md-2">
+    <h5 class="bg-light text-center ml-5 mb-2" style="width: 150px;">注文履歴詳細</h5> 
+  </div>
+  <!--上段-->
+  <div class="row"> 
+    <%= form_with model: @selected_order, url: admin_order_path, local: true do |f| %>
+    <table class="table table-borderless">
+      <tr>
+        <th>購入者</th>
+        <td><u><%= link_to @customer.last_name + @customer.first_name, admin_customer_path(@customer), class: "text-reset" %></u></td>
+      </tr>
+      <tr>
+        <th>注文日</th>
+        <td><%= @selected_order.created_at.strftime("%Y/%m/%d") %></td>
+      </tr>
+      <tr>
+        <th>配送先</th>
+        <td>〒<%= @selected_order.postcode%> <%= @selected_order.address%><br>
+            <%= @selected_order.name%>
+        </td>
+      </tr>
+      <tr>
+        <th>支払方法</th>
+        <td><%= Order.payment_methods_i18n[@selected_order.payment_method] %></td>
+      </tr>
+      <tr>
+        <th>注文ステータス</th>
+        <td>
+          <!-- "入金待ち":0, "入金確認":1, "製作中":2, "発送準備中":3, "発送済":4 -->
+          <%= f.select :status, {Order.statuses_i18n[Order.statuses.key(0)] => Order.statuses.key(0), Order.statuses_i18n[Order.statuses.key(1)] => Order.statuses.key(1), 
+          Order.statuses_i18n[Order.statuses.key(2)] => Order.statuses.key(2), Order.statuses_i18n[Order.statuses.key(3)] => Order.statuses.key(3), Order.statuses_i18n[Order.statuses.key(4)]=> Order.statuses.key(4)}, {},class: "form-control-sm" %>
+          <%= f.submit "更新", class: 'btn btn-sm btn-success mb-1' %>
+        </td>
+      </tr>
+    </table>
+    <% end %>
+  </div>
+    <!--下段-->
+    <div class="row">
+      <!--左側-->
+      <div class="col-md-8">
+        <table class="table">
+          <thead>
+            <th class="bg-light">商品名</th>
+            <th class="bg-light">単価（税込）</th>
+            <th class="bg-light">数量</th>
+            <th class="bg-light">小計</th>
+            <th class="bg-light">製作ステータス</th>
+          </thead>
           
-          <td>
-            <%= form_with model: selected_order_item, url: admin_order_item_path(selected_order_item), method: :patch, local: true do |f| %>
-            <!-- # enum status: { 着手不可:0, 製作待ち: 1, 製作中: 2, 製作完了: 3 }-->
-            <%= f.select :status, {OrderItem.statuses_i18n[OrderItem.statuses.key(0)] => OrderItem.statuses.key(0), OrderItem.statuses_i18n[OrderItem.statuses.key(1)]=> OrderItem.statuses.key(1),
-            OrderItem.statuses_i18n[OrderItem.statuses.key(2)]=> OrderItem.statuses.key(2), OrderItem.statuses_i18n[OrderItem.statuses.key(3)]=> OrderItem.statuses.key(3)}, class: "status" %>
-            <%= f.submit  "更新", class: 'btn btn-success' %>
+          <tbody>
+            <% @selected_order.order_items.each do |selected_order_item| %>
+            <tr>
+              <td><%= selected_order_item.item.name %></td>
+              <td><%= number_with_delimiter((selected_order_item.with_tax_price).to_i) %> 円</td>
+              <td><%= selected_order_item.amount %></td>
+              <td><%= number_with_delimiter(selected_order_item.subtotal) %> 円</td>
+              
+              <td>
+                <%= form_with model: selected_order_item, url: admin_order_item_path(selected_order_item), method: :patch, local: true do |f| %>
+                <!-- # enum status: { 着手不可:0, 製作待ち: 1, 製作中: 2, 製作完了: 3 }-->
+                <%= f.select :status, {OrderItem.statuses_i18n[OrderItem.statuses.key(0)] => OrderItem.statuses.key(0), OrderItem.statuses_i18n[OrderItem.statuses.key(1)]=> OrderItem.statuses.key(1),
+                OrderItem.statuses_i18n[OrderItem.statuses.key(2)]=> OrderItem.statuses.key(2), OrderItem.statuses_i18n[OrderItem.statuses.key(3)]=> OrderItem.statuses.key(3)}, {}, class: 'form-control-sm' %>
+                <%= f.submit  "更新", class: 'btn btn-sm btn-success mb-1' %>
+                <% end %>
+              </td>
+             </tr>
             <% end %>
-          </td>
-            
-          
-        
-         </tr>
-         
-        <% end %>
-      </table>
-
-  </div>
-    <div class="col-xs-4">
-      <div>
-        <p>
-          <strong class="col-xs-3">商品合計</strong>
-          ¥<%= (@selected_order.payment - @selected_order.shipping_fee).to_s(:delimited)%>
-        </p>
+          </tbody>
+        </table>
       </div>
-      <br>
-  
-      <div>
-        <p>
-          <strong class="col-xs-2">送料</strong>
-          ¥<%= @selected_order.shipping_fee.to_s(:delimited)%>
-        </p>
+      <!--右側-->
+      <div class="col-md-4 align-self-end">
+        <table class="table table-borderless">
+          <tr>
+              <th style="width: 40%">商品合計</th>
+              <td><%= (@selected_order.payment - @selected_order.shipping_fee).to_s(:delimited)%> 円</td>
+          </tr>
+          <tr>
+            <p>
+              <th class="col-xs-2" style="width: 40%">送料</th>
+              <td><%= @selected_order.shipping_fee.to_s(:delimited)%> 円</td>
+            </p>
+          </tr>
+          <tr>
+              <th class="col-xs-4" style="width: 40%">請求金額合計</th>
+              <td><b><%= @selected_order.payment.to_s(:delimited) %> 円</b></td>
+          </tr>
+        </table>
       </div>
-      <br>
-  
-      <div>
-        <p>
-          <strong class="col-xs-4">請求金額合計</strong>
-          ¥<%= @selected_order.payment.to_s(:delimited) %>
-        </p>
-      </div>
-      <br>
     </div>
-  </div>
 </div>

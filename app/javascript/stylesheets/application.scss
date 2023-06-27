@@ -3,6 +3,22 @@
 // Fontawesome
 @use '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+// mainが少ない時フッターを下に固定化
+* {
+  font-family: Yu Mincho; 
+}
+
+body {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+}
+
+// ページネーション中央揃え
 .pagination {
   justify-content: center;
 }

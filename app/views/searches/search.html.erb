@@ -7,13 +7,13 @@
         <p>(全0件)</p>
       <% else %>
         <h4>"<%= @word %>"の検索結果</h4>
-        <p>(全<%= @records.count %>件)</p>
+        <p class="pt-1">(全<%= @records.count %>件)</p>
         
       <thead>
         <tr>
-          <th>商品画像</th>
-          <th>商品名</th>
-          <th>価格(税込)</th>
+          <th class="bg-light">商品画像</th>
+          <th class="bg-light">商品名</th>
+          <th class="bg-light">価格(税込)</th>
         </tr>
       </thead>
       <tbody>
@@ -24,30 +24,28 @@
             <td>
               <%= link_to item_path(item) do %>
                 <% if item.image.attached? %>
-                  <%= image_tag item.get_item_image(150, 100) %>
+                  <%= image_tag item.get_item_image(80, 60) %>
                 <% end %>
             </td>
-            <td><%= link_to item.name, item_path(item) %></td>
+            <td><%= link_to item.name, item_path(item)  ,class:"text-dark"%></td>
               <% end %>
               
               <% elsif admin_signed_in? %>
                 <td>
                   <%= link_to admin_item_path(item) do %>
                     <% if item.image.attached? %>
-                      <%= image_tag item.get_item_image(150, 100) %>
+                      <%= image_tag item.get_item_image(80, 60) %>
                     <% end %>
                 </td>
-                <td><%= item.name %></td>
+                <td><%= link_to item.name, item_path(item)  ,class:"text-dark"%></td>
                   <% end %>
               
               <% else %>
                 <td>
                   <%= link_to item_path(item) do %>
-                    <% if item.image.attached? %>
-                      <%= image_tag item.get_item_image(150, 100) %>
-                    <% end %>
+                      <%= image_tag item.get_item_image(80, 60) %>
                 </td>
-                <td/><%= item.name %></td>
+                <td/><%= link_to item.name, item_path(item) ,class:"text-dark"%></td>
                   <% end %>
               <% end %>  
             

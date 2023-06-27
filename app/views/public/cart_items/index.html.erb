@@ -1,7 +1,7 @@
-<div class="container my-4">
+<div class="container my-4 px-sm-1">
   <div class="d-flex align-items-center my-3">
-    <div class="col col-7 col-sm-6 col-md-5 col-lg-4 col-xl-3 px-2">
-      <h5 class="bg-light text-center ml-5 my-0">ショッピングカート</h5>
+    <div class="px-1">
+      <h5 class="bg-light text-center ml-2" style="width: 210px;">ショッピングカート</h5>
     </div>
     <div class="ml-auto mr-2">
       <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, data: { confirm: "カート内商品を全て削除しますか？" }, class: 'btn-sm px-3 btn btn-danger' %>
@@ -28,7 +28,7 @@
             <%= cart_item.item.name %>
           </td>
           <td>
-            <%= number_with_delimiter(cart_item.item.with_tax_price) %>
+            <%= number_with_delimiter(cart_item.item.with_tax_price) %> 円
           </td>
           <td>
               <%= form_with model: cart_item, url: cart_item_path(cart_item.id) do |f| %>
@@ -40,8 +40,8 @@
               </div>
               <% end %>
           </td>
-          <td><%= number_with_delimiter(cart_item.subtotal) %></td>
-          <td>
+          <td><%= number_with_delimiter(cart_item.subtotal) %> 円</td>
+          <td class="text-center">
             <% if cart_item.customer == current_customer %>
               <%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: 'btn btn-danger px-2' %>
             <% end %>
@@ -62,7 +62,7 @@
         <table class="table table-bordered table-hover">
           <tr>
             <th class="bg-light">合計金額</th>
-            <td><%= number_with_delimiter(@total_price) %></td>
+            <td><%= number_with_delimiter(@total_price) %> 円</td>
           </tr>
         </table>
       </div>

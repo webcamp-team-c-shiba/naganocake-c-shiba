@@ -1,4 +1,4 @@
-<div class="container col-xl-8 col-lg-9 my-4 px-sm-0">
+<div class="container col-xl-8 col-lg-9 my-4 px-sm-1">
   <div class="px-1 ml-md-2">
     <h5 class="bg-light text-center ml-5 mb-4" style="width: 130px;">会員一覧</h5>
   </div>
@@ -18,9 +18,9 @@
           <td class="link-black"><%= link_to customer.last_name + customer.first_name, admin_customer_path(customer) %></td>
           <td><%= customer.email %></td>
           <% if customer.is_deleted == false %>
-            <td class="text-success">有効</td>
+            <td class="text-success"><strong>有効</strong></td>
           <% else %>
-            <td class="text-muted">退会</td>
+            <td class="text-muted"><strong>退会</strong></td>
           <% end %>
         </tr>
       <% end %>

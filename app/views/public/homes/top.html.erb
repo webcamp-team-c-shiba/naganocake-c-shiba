@@ -1,10 +1,10 @@
-<div class="container mt-3 mb-3 px-sm-0">
+<div class="container mt-3 mb-3 px-sm-1">
   <div class="row">
     <div class="col-7 col-md-3 col-xl-2 mx-auto">
       <%= render 'public/items/genre_search', genres: @genres %>
     </div>
     <div class="col-md-9 col-xl-10 mx-auto">
-      <div class="d-flex align-items-center justify-content-center"style="background-image: url(<%= asset_path "26604089_s.jpg" %>); background-size: cover; height: 230px;">
+      <div class="d-flex align-items-center justify-content-center"style="background-image: url(<%= asset_path "26604089_s.jpg" %>); background-size: cover; height: 230px;;">
         <div>
           <p style="background-color: rgba(220, 220, 220, 0.7); margin: auto; padding: 20px;">
             ようこそ、ながのCAKEへ！</br>
@@ -15,14 +15,18 @@
         </div>
       </div>
       
-      <h4 class="font-weight-bold my-2">新着商品</h4>
+      <h4 class="font-weight-bold mb-2 mt-4">新着商品</h4>
       
       <div class="row mx-auto">
         <% @items.first(4).each do |item| %>
           <div class="col-6 col-md-3 mb-1 mb-md">
-            <%= image_tag item.get_item_image(150, 100) %></br>
-            <span><%= link_to item.name,item_path(item.id),class: 'text-dark' %></span></br>
-            ¥<%= item.price %>
+            <span class="d-inline-block text-truncate" style="max-width: 190px;">
+              <%= link_to item_path(item.id),class: 'text-dark' do %>
+                <%= image_tag item.get_item_image(150, 100) %></br>
+                <%= item.name %>
+              <% end %>
+            </span></br>
+            ¥<%= number_with_delimiter(item.price) %>
           </div>
         <% end %>
       </div>

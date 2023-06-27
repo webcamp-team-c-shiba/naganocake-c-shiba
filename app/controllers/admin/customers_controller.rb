@@ -19,7 +19,7 @@ class Admin::CustomersController < ApplicationController
       flash[:success] = "#{@customer.last_name}#{@customer.first_name}さんの会員情報が更新されました。"
       redirect_to admin_customer_path(params[:id])
     else 
-      flash[:danger] = "会員情報の更新に失敗しました"
+      flash.now[:danger] = '未記入項目があります'
       render :edit
     end
   end
